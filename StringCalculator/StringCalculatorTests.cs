@@ -37,6 +37,18 @@ namespace StringCalculator
             NumberSequenceReturnsTheSum(numbers, expected);
         }
 
+        [TestCase("8\n9", 17)]
+        public void TwoNumbersSeperatedByNewlineReturnTheirSum(string numbers, int expected)
+        {
+            NumberSequenceReturnsTheSum(numbers, expected);
+        }
+
+        [TestCase("1\n2,3", 6)]
+        public void ThreeNumbersSeperatedByNewlineAndCommaReturnTheirSum(string numbers, int expected)
+        {
+            NumberSequenceReturnsTheSum(numbers, expected);
+        }
+
         private void NumberSequenceReturnsTheSum(string number, int expected)
         {
             var result = _stringCalculator.Add(number);
