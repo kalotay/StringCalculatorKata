@@ -22,7 +22,6 @@ namespace StringCalculator
         {
             NumberSequenceReturnsTheSum(number, expected);
         }
-
        
         [TestCase("2,3", 5)]
         [TestCase("11,9", 20)]
@@ -49,9 +48,15 @@ namespace StringCalculator
             NumberSequenceReturnsTheSum(numbers, expected);
         }
 
-        private void NumberSequenceReturnsTheSum(string number, int expected)
+        [TestCase("//;\n1;2", 3)]
+        public void DelimiterCanBeSpecified(string delimitersAndNumbers, int expected)
         {
-            var result = _stringCalculator.Add(number);
+            NumberSequenceReturnsTheSum(delimitersAndNumbers, expected);
+        }
+
+        private void NumberSequenceReturnsTheSum(string delimitersAndNumbers, int expected)
+        {
+            var result = _stringCalculator.Add(delimitersAndNumbers);
 
             Assert.That(result, Is.EqualTo(expected));
         }
