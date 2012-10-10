@@ -13,3 +13,5 @@ StringCalculator/bin/*
 StringCalculator/bin/**/*
 
 *.user
+
+packages/*
