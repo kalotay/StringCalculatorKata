@@ -5,11 +5,11 @@ StringCalculator/*.resharper.user
 
 #binaries
 StringCalculator/*.suo
-StringCalculator/**/obj
-StringCalculator/**/obj/*
-StringCalculator/**/obj/**/*
-StringCalculator/**/bin
-StringCalculator/**/bin/* 
-StringCalculator/**/bin/**/*
+StringCalculator/obj
+StringCalculator/obj/*
+StringCalculator/obj/**/*
+StringCalculator/bin
+StringCalculator/bin/* 
+StringCalculator/bin/**/*
 
 *.user
