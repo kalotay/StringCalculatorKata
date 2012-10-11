@@ -7,8 +7,8 @@ namespace StringCalculator
     {
         public int Add(string delimitersAndNumbers)
         {
-            var delimiterSpec = new char[] {',', '\n'};
-            var delimiterSpecEnd = -1;
+            var delimiterSpec = new[] {',', '\n'};
+            var numbers = delimitersAndNumbers;
 
             if (String.IsNullOrEmpty(delimitersAndNumbers))
             {
@@ -17,13 +17,12 @@ namespace StringCalculator
 
             if (delimitersAndNumbers.StartsWith("//"))
             {
-                delimiterSpecEnd = delimitersAndNumbers.IndexOf('\n');
-                delimiterSpec = delimitersAndNumbers.Substring(2, delimiterSpecEnd - 2).ToCharArray();
+                var tokens = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
+                delimiterSpec = tokens[0].ToCharArray();
+                numbers = tokens[1];
             }
 
-            var splitNumbers = delimitersAndNumbers.Substring(delimiterSpecEnd + 1).Split(delimiterSpec);
-
-            return splitNumbers.Sum(number => int.Parse(number));
+            return numbers.Split(delimiterSpec).Sum(number => int.Parse(number));
         }
     }
 }
