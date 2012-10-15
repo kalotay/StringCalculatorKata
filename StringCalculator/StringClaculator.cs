@@ -50,13 +50,6 @@ namespace StringCalculator
         }
     }
 
-    internal class NegativeNumberException : Exception
-    {
-        public NegativeNumberException(string negativeNumber): base("Received following negative numbers: " + negativeNumber)
-        {
-        }
-    }
-
     public class DelimitersAndNumbers
     {
         public DelimitersAndNumbers(string delimiters, string numbers)

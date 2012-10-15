@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NegativeNumberException.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="StringClaculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
