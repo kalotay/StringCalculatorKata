@@ -31,7 +31,7 @@ namespace StringCalculator
             var value = int.Parse(number);
             if (value < 0)
             {
-                throw new Exception();
+                throw new Exception("Received following negative numbers: " + number);
             }
             return value;
         }

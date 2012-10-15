@@ -57,7 +57,8 @@ namespace StringCalculator
         [Test]
         public void NegativeNumbersThrowException()
         {
-            Assert.Throws<Exception>(() => _stringCalculator.Add("-1"));
+            var exception = Assert.Throws<Exception>(() => _stringCalculator.Add("-1"));
+            Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1"));
         }
 
         private void NumberSequenceReturnsTheSum(string delimitersAndNumbers, int expected)
