@@ -23,7 +23,17 @@ namespace StringCalculator
             var delimiters = delimitersAndNumbers.Delimiters;
             var numbers = delimitersAndNumbers.Numbers;
 
-            return numbers.Split(delimiters).Sum(number => int.Parse(number));
+            return numbers.Split(delimiters).Sum(number => ParserNumber(number));
+        }
+
+        private int ParserNumber(string number)
+        {
+            var value = int.Parse(number);
+            if (value < 0)
+            {
+                throw new Exception();
+            }
+            return value;
         }
 
         private DelimitersAndNumbers SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)

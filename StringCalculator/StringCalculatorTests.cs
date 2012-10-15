@@ -54,6 +54,12 @@ namespace StringCalculator
             NumberSequenceReturnsTheSum(delimitersAndNumbers, expected);
         }
 
+        [Test]
+        public void NegativeNumbersThrowException()
+        {
+            Assert.That(() => _stringCalculator.Add("-1"), Throws.Exception);
+        }
+
         private void NumberSequenceReturnsTheSum(string delimitersAndNumbers, int expected)
         {
             var result = _stringCalculator.Add(delimitersAndNumbers);
