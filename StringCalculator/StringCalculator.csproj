@@ -44,8 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NegativeNumberException.cs" />
+    <Compile Include="StringCalculator.cs" />
     <Compile Include="StringCalculatorTests.cs" />
-    <Compile Include="StringClaculator.cs" />
+    <Compile Include="DelimitersAndNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
