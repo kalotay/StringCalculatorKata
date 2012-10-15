@@ -12,30 +12,44 @@ namespace StringCalculator
             _defaultDelimiters = defaultDelimiters;
         }
 
-        public int Add(string delimitersAndNumbers)
+        public int Add(string message)
         {
-            if (String.IsNullOrEmpty(delimitersAndNumbers))
+            if (String.IsNullOrEmpty(message))
             {
                 return 0;
             }
 
-            var splitDelimitersAndNumbers = SplitDelimitersAndNumbersWithDefault(delimitersAndNumbers);
-            var delimiters = splitDelimitersAndNumbers[0].ToCharArray();
-            var numbers = splitDelimitersAndNumbers[1];
+            var delimitersAndNumbers = SplitDelimitersAndNumbersWithDefault(message);
+            var delimiters = delimitersAndNumbers.Delimiters;
+            var numbers = delimitersAndNumbers.Numbers;
 
             return numbers.Split(delimiters).Sum(number => int.Parse(number));
         }
 
-        private string[] SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)
+        private DelimitersAndNumbers SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)
         {
            return delimitersAndNumbers.StartsWith("//")
                ? SplitDelimitersAndNumbers(delimitersAndNumbers)
-               : new[] {_defaultDelimiters, delimitersAndNumbers};
+               : new DelimitersAndNumbers(_defaultDelimiters, delimitersAndNumbers);
         }
 
-        private static string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
+        private static DelimitersAndNumbers SplitDelimitersAndNumbers(string delimitersAndNumbers)
         {
-            return delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
+            var splitDelimitersAndNumbers = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
+            return new DelimitersAndNumbers(splitDelimitersAndNumbers[0], splitDelimitersAndNumbers[1]);
         }
+    }
+
+    public class DelimitersAndNumbers
+    {
+        public DelimitersAndNumbers(string delimiters, string numbers)
+        {
+            Delimiters = delimiters.ToCharArray();
+            Numbers = numbers;
+        }
+
+        public char [] Delimiters { get; set; }
+
+        public string Numbers { get; set; }
     }
 }
