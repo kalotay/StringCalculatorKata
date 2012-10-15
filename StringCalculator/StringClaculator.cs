@@ -26,7 +26,7 @@ namespace StringCalculator
             return numbers.Split(delimiters).Sum(number => ParserNumber(number));
         }
 
-        private int ParserNumber(string number)
+        private static int ParserNumber(string number)
         {
             var value = int.Parse(number);
             if (value < 0)
