@@ -37,15 +37,12 @@ namespace StringCalculator
         private int ParserNumber(string number)
         {
             var value = int.Parse(number);
-            if (value < 0)
-            {
-                _negativeNumberException.Add(number);
-                return 0;
-            }
-            else
+            if (value >= 0)
             {
                 return value;
             }
+            _negativeNumberException.Add(number);
+            return 0;
         }
 
         private DelimitersAndNumbers SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)
