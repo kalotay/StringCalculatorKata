@@ -68,6 +68,15 @@ namespace StringCalculator
             Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1 -2"));
         }
 
+        [TestCase("1000", 0)]
+        [TestCase("1000,1", 1)]
+        [TestCase("9001", 0)]
+        [TestCase("9001,2", 2)]
+        public void OneThousandAndAboveShouldBeIgnored(string numbers, int expected)
+        {
+            NumberSequenceReturnsTheSum(numbers, expected);
+        }
+
         private void NumberSequenceReturnsTheSum(string delimitersAndNumbers, int expected)
         {
             var result = _stringCalculator.Add(delimitersAndNumbers);
