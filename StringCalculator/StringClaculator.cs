@@ -5,6 +5,13 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
+        private readonly string _defaultDelimiters;
+
+        public StringCalculator(string defaultDelimiters = ",\n")
+        {
+            _defaultDelimiters = defaultDelimiters;
+        }
+
         public int Add(string delimitersAndNumbers)
         {
             if (String.IsNullOrEmpty(delimitersAndNumbers))
@@ -19,12 +26,11 @@ namespace StringCalculator
             return numbers.Split(delimiters).Sum(number => int.Parse(number));
         }
 
-        private static string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
+        private string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
         {
-            var splitDelimitersAndNumbers = delimitersAndNumbers.StartsWith("//")
-                                                ? delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2)
-                                                : new[] {",\n", delimitersAndNumbers};
-            return splitDelimitersAndNumbers;
+           return delimitersAndNumbers.StartsWith("//")
+               ? delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2)
+               : new[] {_defaultDelimiters, delimitersAndNumbers};
         }
     }
 }
