@@ -19,18 +19,23 @@ namespace StringCalculator
                 return 0;
             }
 
-            var splitDelimitersAndNumbers = SplitDelimitersAndNumbers(delimitersAndNumbers);
+            var splitDelimitersAndNumbers = SplitDelimitersAndNumbersWithDefault(delimitersAndNumbers);
             var delimiters = splitDelimitersAndNumbers[0].ToCharArray();
             var numbers = splitDelimitersAndNumbers[1];
 
             return numbers.Split(delimiters).Sum(number => int.Parse(number));
         }
 
-        private string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
+        private string[] SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)
         {
            return delimitersAndNumbers.StartsWith("//")
-               ? delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2)
+               ? SplitDelimitersAndNumbers(delimitersAndNumbers)
                : new[] {_defaultDelimiters, delimitersAndNumbers};
+        }
+
+        private static string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
+        {
+            return delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
         }
     }
 }
