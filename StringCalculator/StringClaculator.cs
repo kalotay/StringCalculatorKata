@@ -7,22 +7,24 @@ namespace StringCalculator
     {
         public int Add(string delimitersAndNumbers)
         {
-            var delimiterSpec = new[] {',', '\n'};
-            var numbers = delimitersAndNumbers;
-
             if (String.IsNullOrEmpty(delimitersAndNumbers))
             {
                 return 0;
             }
 
-            if (delimitersAndNumbers.StartsWith("//"))
-            {
-                var tokens = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
-                delimiterSpec = tokens[0].ToCharArray();
-                numbers = tokens[1];
-            }
+            var splitDelimitersAndNumbers = SplitDelimitersAndNumbers(delimitersAndNumbers);
+            var delimiters = splitDelimitersAndNumbers[0].ToCharArray();
+            var numbers = splitDelimitersAndNumbers[1];
 
-            return numbers.Split(delimiterSpec).Sum(number => int.Parse(number));
+            return numbers.Split(delimiters).Sum(number => int.Parse(number));
+        }
+
+        private static string[] SplitDelimitersAndNumbers(string delimitersAndNumbers)
+        {
+            var splitDelimitersAndNumbers = delimitersAndNumbers.StartsWith("//")
+                                                ? delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2)
+                                                : new[] {",\n", delimitersAndNumbers};
+            return splitDelimitersAndNumbers;
         }
     }
 }
