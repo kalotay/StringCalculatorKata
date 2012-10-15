@@ -31,7 +31,7 @@ namespace StringCalculator
             var value = int.Parse(number);
             if (value < 0)
             {
-                throw new Exception("Received following negative numbers: " + number);
+                throw new NegativeNumberException(number);
             }
             return value;
         }
@@ -47,6 +47,13 @@ namespace StringCalculator
         {
             var splitDelimitersAndNumbers = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
             return new DelimitersAndNumbers(splitDelimitersAndNumbers[0], splitDelimitersAndNumbers[1]);
+        }
+    }
+
+    internal class NegativeNumberException : Exception
+    {
+        public NegativeNumberException(string negativeNumber): base("Received following negative numbers: " + negativeNumber)
+        {
         }
     }
 
