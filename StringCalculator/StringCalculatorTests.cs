@@ -61,6 +61,13 @@ namespace StringCalculator
             Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1"));
         }
 
+        [Test]
+        public void TwoNegativeNumbersAreBothReportedInException()
+        {
+            var exception = Assert.Throws<NegativeNumberException>(() => _stringCalculator.Add("-1,-2"));
+            Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1 -2"));
+        }
+
         private void NumberSequenceReturnsTheSum(string delimitersAndNumbers, int expected)
         {
             var result = _stringCalculator.Add(delimitersAndNumbers);
