@@ -108,5 +108,13 @@ namespace StringCalculator
 
             Assert.That(nextParser, Is.InstanceOf<MultiCharacterDelimiterParser>());
         }
+
+        [Test]
+        public void MultiCharacterDelimiterParserHasNotTerminated()
+        {
+            var nextParser = _delimiterParser.Read('[');
+
+            Assert.That(nextParser.HasTerminated, Is.False);
+        }
     }
 }
