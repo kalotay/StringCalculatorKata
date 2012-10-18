@@ -43,7 +43,7 @@ namespace StringCalculator
         }
 
         [Test]
-        public void ReadingACharacterSequenceStoresThem()
+        public void ReadingAormalCharacterSequenceStoresThem()
         {
             var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
 
@@ -51,6 +51,14 @@ namespace StringCalculator
             Assert.That(nextParser.Delimiters, Contains.Item(","));
             Assert.That(nextParser.Delimiters, Contains.Item("."));
             Assert.That(nextParser.Delimiters, Contains.Item("-"));
+        }
+
+        [Test]
+        public void ReadingANormalCharacterSeqenceReturnsThis()
+        {
+            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+
+            Assert.That(nextParser, Is.SameAs(nextParser));
         }
     }
 }
