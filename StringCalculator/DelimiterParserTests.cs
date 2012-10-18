@@ -22,12 +22,6 @@ namespace StringCalculator
         }
 
         [Test]
-        public void InitialParentIsNull()
-        {
-            Assert.That(_delimiterParser.Parent, Is.Null);
-        }
-
-        [Test]
         public void ReadingANormalCharacterReturnsThis()
         {
             var nextParser = _delimiterParser.Read(';');
