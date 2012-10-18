@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace StringCalculator
 {
@@ -10,16 +10,26 @@ namespace StringCalculator
 
         public readonly IDelimiterParser ParentParser;
 
+        private readonly StringBuilder _multiCharDelimiter;
+
         public MultiCharacterDelimiterParser(IDelimiterParser parentParser)
         {
             Delimiters = parentParser.Delimiters;
             HasTerminated = false;
             ParentParser = parentParser;
+            _multiCharDelimiter = new StringBuilder();
         }
 
         public IDelimiterParser Read(char input)
         {
-            return (input == ']') ? ParentParser : this;
+            if (input == ']')
+            {
+                Delimiters.Add(_multiCharDelimiter.ToString());
+                return ParentParser;
+            }
+
+            _multiCharDelimiter.Append(input);
+            return this;
         }
     }
 }

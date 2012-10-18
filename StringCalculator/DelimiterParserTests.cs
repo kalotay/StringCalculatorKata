@@ -145,6 +145,19 @@ namespace StringCalculator
 
             Assert.That(nextParser, Is.SameAs(_delimiterParser));
         }
+
+        [Test]
+        public void MultiCharacterDelimiterParserAddsDelimiterAfterClosingBracket()
+        {
+            var intermediateParser = "[,.;".Aggregate(_delimiterParser,
+                                   (currentParser, character) => currentParser.Read(character));
+
+            CollectionAssert.DoesNotContain(intermediateParser.Delimiters, ",.;");
+
+            var comletedParser = intermediateParser.Read(']');
+
+            Assert.That(comletedParser.Delimiters, Contains.Item(",.;"));
+        }
     }
 
 }
