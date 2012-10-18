@@ -5,18 +5,16 @@ namespace StringCalculator
 {
     public class MultiCharacterDelimiterParser: IDelimiterParser
     {
-        public readonly IDelimiterParser ParentParser;
-        public IList<string> Delimiters
-        {
-            get { return ParentParser.Delimiters; }
-        }
-
+        public IList<string> Delimiters {get; private set ;}
         public bool HasTerminated { get; private set; }
+
+        public readonly IDelimiterParser ParentParser;
 
         public MultiCharacterDelimiterParser(IDelimiterParser parentParser)
         {
-            ParentParser = parentParser;
+            Delimiters = parentParser.Delimiters;
             HasTerminated = false;
+            ParentParser = parentParser;
         }
 
         public IDelimiterParser Read(char input)
