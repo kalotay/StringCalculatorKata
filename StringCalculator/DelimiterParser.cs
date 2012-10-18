@@ -20,6 +20,11 @@ namespace StringCalculator
                 return new TerminatedDelimiterParser(Delimiters);
             }
 
+            if (input == '[')
+            {
+                return new MultiCharacterDelimiterParser(this);
+            }
+
             Delimiters.Add(input.ToString());
             return this;
         }
