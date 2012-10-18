@@ -105,7 +105,7 @@ namespace StringCalculator
         {
             var nextParser = _delimiterParser.Read('\n');
 
-            var exception = Assert.Throws<Exception>(() => nextParser.Read(','));
+            var exception = Assert.Throws<ParserTerminatedException>(() => nextParser.Read(','));
         }
     }
 }

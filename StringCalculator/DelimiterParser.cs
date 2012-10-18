@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace StringCalculator
@@ -20,7 +19,7 @@ namespace StringCalculator
         {
             if (HasTerminated)
             {
-                throw new Exception();
+                throw new ParserTerminatedException();
             }
 
             if (input == '\n')

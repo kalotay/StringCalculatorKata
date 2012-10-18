@@ -47,6 +47,7 @@
     <Compile Include="DelimiterParserTests.cs" />
     <Compile Include="IDelimiterParser.cs" />
     <Compile Include="NegativeNumberException.cs" />
+    <Compile Include="ParserTerminatedException.cs" />
     <Compile Include="StringCalculator.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="DelimitersAndNumbers.cs" />
