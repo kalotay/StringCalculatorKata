@@ -128,6 +128,14 @@ namespace StringCalculator
 
             Assert.That(nextParser.ParentParser, Is.SameAs(_delimiterParser));
         }
+
+        [Test]
+        public void DelimitersInMultiCharacterDelimiterShouldForwardToParentParsers()
+        {
+            var nextParser = (MultiCharacterDelimiterParser) _delimiterParser.Read('[');
+
+            Assert.That(nextParser.Delimiters, Is.SameAs(_delimiterParser.Delimiters));
+        }
     }
 
 }
