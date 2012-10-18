@@ -5,7 +5,7 @@ namespace StringCalculator
 {
     public class MultiCharacterDelimiterParser: IDelimiterParser
     {
-        public IList<string> Delimiters {get; private set ;}
+        public ISet<string> Delimiters {get; private set ;}
         public bool HasTerminated { get; private set; }
 
         public readonly IDelimiterParser ParentParser;

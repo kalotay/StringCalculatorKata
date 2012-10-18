@@ -4,12 +4,12 @@ namespace StringCalculator
 {
     public class DelimiterParser: IDelimiterParser
     {
-        public IList<string> Delimiters { get; private set; }
+        public ISet<string> Delimiters { get; private set; }
         public bool HasTerminated { get; private set; }
 
         public DelimiterParser()
         {
-            Delimiters = new List<string>();
+            Delimiters = new HashSet<string>();
             HasTerminated = false;
         }
 

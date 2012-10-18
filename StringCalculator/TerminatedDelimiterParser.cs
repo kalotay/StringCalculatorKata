@@ -4,10 +4,10 @@ namespace StringCalculator
 {
     public class TerminatedDelimiterParser : IDelimiterParser
     {
-        public IList<string> Delimiters { get; private set; }
+        public ISet<string> Delimiters { get; private set; }
         public bool HasTerminated { get; private set; }
 
-        public TerminatedDelimiterParser(IList<string> delimiters)
+        public TerminatedDelimiterParser(ISet<string> delimiters)
         {
             Delimiters = delimiters;
             HasTerminated = true;
