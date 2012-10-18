@@ -19,7 +19,12 @@ namespace StringCalculator
 
         public IDelimiterParser Read(char input)
         {
-            throw new NotImplementedException();
+            if (input == ']')
+            {
+                return ParentParser;
+            }
+
+            return this;
         }
     }
 }

@@ -122,7 +122,7 @@ namespace StringCalculator
         }
 
         [Test]
-        public void MultiCharacterDelimiterParserStoresParentContext()
+        public void MultiCharacterDelimiterParserStoresParentParser()
         {
             var nextParser = (MultiCharacterDelimiterParser) _delimiterParser.Read('[');
 
@@ -135,6 +135,15 @@ namespace StringCalculator
             var nextParser = (MultiCharacterDelimiterParser) _delimiterParser.Read('[');
 
             Assert.That(nextParser.Delimiters, Is.SameAs(_delimiterParser.Delimiters));
+        }
+
+        [Test]
+        public void MultiCharacterDelimiterParserReturnParentParserAfterClosingSquareBrackets()
+        {
+            var nextParser = "[]".Aggregate(_delimiterParser,
+                                    (currentParser, character) => currentParser.Read(character));
+
+            Assert.That(nextParser, Is.SameAs(_delimiterParser));
         }
     }
 
