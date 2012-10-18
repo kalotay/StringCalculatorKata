@@ -17,20 +17,32 @@ namespace StringCalculator
 
         public IDelimiterParser Read(char input)
         {
-            if (HasTerminated)
-            {
-                throw new ParserTerminatedException();
-            }
-
             if (input == '\n')
             {
-                HasTerminated = true;
+                return new TerminatedDelimiterParser(Delimiters);
             }
-            else
-            {
-                Delimiters.Add(input.ToString());
-            }
+
+            Delimiters.Add(input.ToString());
             return this;
+        }
+    }
+
+    public class TerminatedDelimiterParser : IDelimiterParser
+    {
+        public IList<string> Delimiters { get; private set; }
+        public IDelimiterParser Parent { get; private set; }
+        public bool HasTerminated { get; private set; }
+
+        public TerminatedDelimiterParser(IList<string> delimiters)
+        {
+            Delimiters = delimiters;
+            Parent = null;
+            HasTerminated = true;
+        }
+
+        public IDelimiterParser Read(char input)
+        {
+            throw new ParserTerminatedException();
         }
     }
 }
