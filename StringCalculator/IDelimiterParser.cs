@@ -6,6 +6,7 @@ namespace StringCalculator
     {
         IList<string> Delimiters { get; }
         IDelimiterParser Parent { get; }
+        bool HasTerminated { get; }
         IDelimiterParser Read(char input);
     }
 }

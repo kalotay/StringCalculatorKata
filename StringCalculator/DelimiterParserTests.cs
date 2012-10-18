@@ -60,5 +60,35 @@ namespace StringCalculator
 
             Assert.That(nextParser, Is.SameAs(nextParser));
         }
+
+        [Test]
+        public void InitiallyParserHasNotTerminated()
+        {
+            Assert.That(_delimiterParser.HasTerminated, Is.False);
+        }
+
+        [Test]
+        public void ReadingNormalCharacterDoesNotTerminate()
+        {
+            var nextParser = _delimiterParser.Read(';');
+
+            Assert.That(nextParser.HasTerminated, Is.False);
+        }
+
+        [Test]
+        public void ReadingNormalCharacterSequenceDoesNotTerminate()
+        {
+            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+
+            Assert.That(nextParser.HasTerminated, Is.False);
+        }
+
+        [Test]
+        public void ReadingNewLineTerminatesTheParser()
+        {
+            var nextParser = _delimiterParser.Read('\n');
+
+            Assert.That(nextParser.HasTerminated, Is.True);
+        }
     }
 }
