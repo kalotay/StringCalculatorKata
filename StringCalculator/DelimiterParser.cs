@@ -15,6 +15,7 @@ namespace StringCalculator
 
         public IDelimiterParser Read(char input)
         {
+            Delimiters.Add(input.ToString());
             return this;
         }
     }

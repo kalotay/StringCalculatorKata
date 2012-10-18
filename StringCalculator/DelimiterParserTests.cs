@@ -28,9 +28,17 @@ namespace StringCalculator
         [Test]
         public void ReadingANormalCharacterReturnsThis()
         {
-            var nextParser = _delimiterParser.Read('a');
+            var nextParser = _delimiterParser.Read(';');
 
             Assert.That(nextParser, Is.SameAs(nextParser));
+        }
+
+        [Test]
+        public void ReadingANormalCharacterStoresIt()
+        {
+            var nextParser = _delimiterParser.Read(';');
+
+            Assert.That(nextParser.Delimiters, Contains.Item(";"));
         }
     }
 }
