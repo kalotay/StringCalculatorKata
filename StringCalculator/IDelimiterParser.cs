@@ -4,7 +4,7 @@ namespace StringCalculator
 {
     public interface IDelimiterParser
     {
-        List<string> Delimiters { get; }
+        IList<string> Delimiters { get; }
         IDelimiterParser Parent { get; }
         IDelimiterParser Read(char input);
     }

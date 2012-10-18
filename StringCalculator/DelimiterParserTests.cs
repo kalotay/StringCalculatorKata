@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 
 namespace StringCalculator
 {
@@ -39,6 +40,17 @@ namespace StringCalculator
             var nextParser = _delimiterParser.Read(';');
 
             Assert.That(nextParser.Delimiters, Contains.Item(";"));
+        }
+
+        [Test]
+        public void ReadingACharacterSequenceStoresThem()
+        {
+            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+
+            Assert.That(nextParser.Delimiters, Contains.Item(";"));
+            Assert.That(nextParser.Delimiters, Contains.Item(","));
+            Assert.That(nextParser.Delimiters, Contains.Item("."));
+            Assert.That(nextParser.Delimiters, Contains.Item("-"));
         }
     }
 }

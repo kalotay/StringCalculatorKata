@@ -4,7 +4,7 @@ namespace StringCalculator
 {
     public class DelimiterParser: IDelimiterParser
     {
-        public List<string> Delimiters { get; private set; }
+        public IList<string> Delimiters { get; private set; }
         public IDelimiterParser Parent { get; private set; }
 
         public DelimiterParser()
