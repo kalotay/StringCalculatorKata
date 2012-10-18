@@ -90,5 +90,13 @@ namespace StringCalculator
 
             Assert.That(nextParser.HasTerminated, Is.True);
         }
+
+        [Test]
+        public void ReadingNewLineAfterCharaceterSequenceTerminatesTheParser()
+        {
+            var nextParser = ",;.-\n".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+
+            Assert.That(nextParser.HasTerminated, Is.True);
+        }
     }
 }
