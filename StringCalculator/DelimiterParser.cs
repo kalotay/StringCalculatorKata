@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace StringCalculator
@@ -17,6 +18,11 @@ namespace StringCalculator
 
         public IDelimiterParser Read(char input)
         {
+            if (HasTerminated)
+            {
+                throw new Exception();
+            }
+
             if (input == '\n')
             {
                 HasTerminated = true;

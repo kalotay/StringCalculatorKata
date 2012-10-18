@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace StringCalculator
@@ -97,6 +98,14 @@ namespace StringCalculator
             var nextParser = ",;.-\n".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
 
             Assert.That(nextParser.HasTerminated, Is.True);
+        }
+
+        [Test]
+        public void ReadingAfterTerminationThrowsException()
+        {
+            var nextParser = _delimiterParser.Read('\n');
+
+            var exception = Assert.Throws<Exception>(() => nextParser.Read(','));
         }
     }
 }
