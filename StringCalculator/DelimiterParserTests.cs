@@ -39,7 +39,8 @@ namespace StringCalculator
         [Test]
         public void ReadingAormalCharacterSequenceStoresThem()
         {
-            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+            var nextParser = ",;.-".Aggregate(_delimiterParser,
+                                              (currentParser, character) => currentParser.Read(character));
 
             Assert.That(nextParser.Delimiters, Contains.Item(";"));
             Assert.That(nextParser.Delimiters, Contains.Item(","));
@@ -50,7 +51,8 @@ namespace StringCalculator
         [Test]
         public void ReadingANormalCharacterSeqenceReturnsThis()
         {
-            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+            var nextParser = ",;.-".Aggregate(_delimiterParser,
+                                              (currentParser, character) => currentParser.Read(character));
 
             Assert.That(nextParser, Is.SameAs(nextParser));
         }
@@ -72,7 +74,8 @@ namespace StringCalculator
         [Test]
         public void ReadingNormalCharacterSequenceDoesNotTerminate()
         {
-            var nextParser = ",;.-".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+            var nextParser = ",;.-".Aggregate(_delimiterParser,
+                                              (currentParser, character) => currentParser.Read(character));
 
             Assert.That(nextParser.HasTerminated, Is.False);
         }
@@ -88,7 +91,8 @@ namespace StringCalculator
         [Test]
         public void ReadingNewLineAfterCharaceterSequenceTerminatesTheParser()
         {
-            var nextParser = ",;.-\n".Aggregate(_delimiterParser, (currentParser, character) => currentParser.Read(character));
+            var nextParser = ",;.-\n".Aggregate(_delimiterParser,
+                                                (currentParser, character) => currentParser.Read(character));
 
             Assert.That(nextParser.HasTerminated, Is.True);
         }
@@ -116,5 +120,14 @@ namespace StringCalculator
 
             Assert.That(nextParser.HasTerminated, Is.False);
         }
+
+        [Test]
+        public void MultiCharacterDelimiterParserStoresParentContext()
+        {
+            var nextParser = (MultiCharacterDelimiterParser) _delimiterParser.Read('[');
+
+            Assert.That(nextParser.ParentParser, Is.SameAs(_delimiterParser));
+        }
     }
+
 }
