@@ -7,7 +7,7 @@ namespace StringCalculator
         public ISet<string> Delimiters { get; private set; }
         public bool HasTerminated { get; private set; }
 
-        public TerminatedDelimiterParser(ISet<string> delimiters)
+        internal TerminatedDelimiterParser(ISet<string> delimiters)
         {
             Delimiters = delimiters;
             HasTerminated = true;

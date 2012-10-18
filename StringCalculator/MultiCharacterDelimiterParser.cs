@@ -12,7 +12,7 @@ namespace StringCalculator
 
         private readonly StringBuilder _multiCharDelimiter;
 
-        public MultiCharacterDelimiterParser(IDelimiterParser parentParser)
+        internal MultiCharacterDelimiterParser(IDelimiterParser parentParser)
         {
             Delimiters = parentParser.Delimiters;
             HasTerminated = false;
