@@ -19,12 +19,7 @@ namespace StringCalculator
 
         public IDelimiterParser Read(char input)
         {
-            if (input == ']')
-            {
-                return ParentParser;
-            }
-
-            return this;
+            return (input == ']') ? ParentParser : this;
         }
     }
 }
