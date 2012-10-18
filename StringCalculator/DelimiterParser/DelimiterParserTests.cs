@@ -1,7 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
 using NUnit.Framework;
 
-namespace StringCalculator
+namespace StringCalculator.DelimiterParser
 {
     [TestFixture]
     public class DelimiterParserTests

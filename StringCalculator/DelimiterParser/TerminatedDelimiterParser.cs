@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StringCalculator
+namespace StringCalculator.DelimiterParser
 {
     public class TerminatedDelimiterParser : IDelimiterParser
     {
