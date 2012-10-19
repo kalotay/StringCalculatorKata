@@ -29,9 +29,14 @@ namespace StringCalculator
 
             if (message.StartsWith("//"))
             {
-                var delimitersAndNumbers = SplitDelimitersAndNumbers(message);
-                delimiters = delimitersAndNumbers.Delimiters;
-                numbers = delimitersAndNumbers.Numbers;
+                var delimiterParserDriver = new DelimiterParserDriver(new DelimiterParser.DelimiterParser());
+                numbers = message.Substring(2);
+                
+                while (delimiterParserDriver.Read(numbers.First()))
+                {
+                    numbers = numbers.Substring(1);
+                }
+                delimiters = delimiterParserDriver.Delimiters.ToArray();
             }
 
             _negativeNumberException = new NegativeNumberException();
@@ -58,6 +63,25 @@ namespace StringCalculator
         {
             var splitDelimitersAndNumbers = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
             return new DelimitersAndNumbers(splitDelimitersAndNumbers[0], splitDelimitersAndNumbers[1]);
+        }
+    }
+
+    public class DelimiterParserDriver
+    {
+        private DelimiterParser.IDelimiterParser _delimiterParser;
+
+        public DelimiterParserDriver(DelimiterParser.IDelimiterParser delimiterParser)
+        {
+            _delimiterParser = delimiterParser;
+            Delimiters = delimiterParser.Delimiters;
+        }
+
+        public ISet<string> Delimiters { get; private set; }
+
+        public bool Read(char c)
+        {
+            _delimiterParser = _delimiterParser.Read(c);
+            return !_delimiterParser.HasTerminated;
         }
     }
 }

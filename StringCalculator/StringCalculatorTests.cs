@@ -49,6 +49,7 @@ namespace StringCalculator
         }
 
         [TestCase("//;\n1;2", 3)]
+        [TestCase("//;_\n1_3;3", 7)]
         public void DelimiterCanBeSpecified(string delimitersAndNumbers, int expected)
         {
             NumberSequenceReturnsTheSum(delimitersAndNumbers, expected);
