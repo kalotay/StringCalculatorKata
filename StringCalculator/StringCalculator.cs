@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StringCalculator
 {
     public class StringCalculator
     {
-        private readonly string _defaultDelimiters;
+        private readonly string[] _defaultDelimiters;
         private NegativeNumberException _negativeNumberException;
 
-        public StringCalculator(string defaultDelimiters = ",\n")
+        public StringCalculator(ISet<string> defaultDelimiters)
         {
-            _defaultDelimiters = defaultDelimiters;
+            _defaultDelimiters = defaultDelimiters.ToArray();
         }
+
+        public StringCalculator(): this(new HashSet<string>{",", "\n"})
+        {}
 
         public int Add(string message)
         {
@@ -47,7 +51,7 @@ namespace StringCalculator
         {
             return delimitersAndNumbers.StartsWith("//")
                        ? SplitDelimitersAndNumbers(delimitersAndNumbers)
-                       : new DelimitersAndNumbers(_defaultDelimiters, delimitersAndNumbers);
+                       : new DelimitersAndNumbers(_defaultDelimiters.Aggregate((s1, s2) => s1 + s2), delimitersAndNumbers);
         }
 
         private static DelimitersAndNumbers SplitDelimitersAndNumbers(string delimitersAndNumbers)
