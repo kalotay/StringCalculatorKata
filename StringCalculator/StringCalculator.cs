@@ -58,30 +58,5 @@ namespace StringCalculator
             }
             return value < 1000 ? value : 0;
         }
-
-        private static DelimitersAndNumbers SplitDelimitersAndNumbers(string delimitersAndNumbers)
-        {
-            var splitDelimitersAndNumbers = delimitersAndNumbers.Substring(2).Split(new[] {'\n'}, 2);
-            return new DelimitersAndNumbers(splitDelimitersAndNumbers[0], splitDelimitersAndNumbers[1]);
-        }
-    }
-
-    public class DelimiterParserDriver
-    {
-        private DelimiterParser.IDelimiterParser _delimiterParser;
-
-        public DelimiterParserDriver(DelimiterParser.IDelimiterParser delimiterParser)
-        {
-            _delimiterParser = delimiterParser;
-            Delimiters = delimiterParser.Delimiters;
-        }
-
-        public ISet<string> Delimiters { get; private set; }
-
-        public bool Read(char c)
-        {
-            _delimiterParser = _delimiterParser.Read(c);
-            return !_delimiterParser.HasTerminated;
-        }
     }
 }
