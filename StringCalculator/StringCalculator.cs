@@ -24,12 +24,19 @@ namespace StringCalculator
                 return 0;
             }
 
-            var delimitersAndNumbers = SplitDelimitersAndNumbersWithDefault(message);
-            var delimiters = delimitersAndNumbers.Delimiters;
-            var numbers = delimitersAndNumbers.Numbers;
+            var delimiters = _defaultDelimiters;
+            var numbers = message;
+
+            if (message.StartsWith("//"))
+            {
+                var delimitersAndNumbers = SplitDelimitersAndNumbers(message);
+                delimiters = delimitersAndNumbers.Delimiters;
+                numbers = delimitersAndNumbers.Numbers;
+            }
+
             _negativeNumberException = new NegativeNumberException();
 
-            var result = numbers.Split(delimiters).Sum(number => ParserNumber(number));
+            var result = numbers.Split(delimiters.Select(s => s.First()).ToArray()).Sum(number => ParserNumber(number));
             if (!_negativeNumberException.IsEmpty())
             {
                 throw _negativeNumberException;
@@ -45,13 +52,6 @@ namespace StringCalculator
                 _negativeNumberException.Add(number);
             }
             return value < 1000 ? value : 0;
-        }
-
-        private DelimitersAndNumbers SplitDelimitersAndNumbersWithDefault(string delimitersAndNumbers)
-        {
-            return delimitersAndNumbers.StartsWith("//")
-                       ? SplitDelimitersAndNumbers(delimitersAndNumbers)
-                       : new DelimitersAndNumbers(_defaultDelimiters.Aggregate((s1, s2) => s1 + s2), delimitersAndNumbers);
         }
 
         private static DelimitersAndNumbers SplitDelimitersAndNumbers(string delimitersAndNumbers)
