@@ -54,6 +54,7 @@
     <Compile Include="DelimitersAndNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TerminatedDelimiterParser.cs" />
+    <Compile Include="IParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
