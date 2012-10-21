@@ -50,6 +50,7 @@
     <Compile Include="DelimitersAndNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="IProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
