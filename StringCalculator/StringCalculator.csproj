@@ -49,6 +49,7 @@
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="DelimitersAndNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
