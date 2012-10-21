@@ -56,6 +56,7 @@
     <Compile Include="TerminatedDelimiterParser.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="IProcessor.cs" />
+    <Compile Include="HeaderParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
