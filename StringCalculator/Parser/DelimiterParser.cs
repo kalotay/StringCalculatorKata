@@ -54,16 +54,19 @@ namespace StringCalculator.Parser
         {
             var delimiterGroups = DelimitersRegex.Match(message)
                 .Groups;
-            var singleCharDelimiters = delimiterGroups["singlechar"];
-            var multiCharDelimiters = delimiterGroups["multichar"];
+            var singleCharDelimiterGroup = delimiterGroups["singlechar"];
+            var multiCharDelimiterGroup = delimiterGroups["multichar"];
 
-            if ((singleCharDelimiters.Length + multiCharDelimiters.Length) < 1)
+            if ((singleCharDelimiterGroup.Length + multiCharDelimiterGroup.Length) < 1)
             {
                 return _defaultDelimiters;
             }
 
-            var delimiters = singleCharDelimiters.Captures.Cast<Capture>()
-                .Concat(multiCharDelimiters.Captures.Cast<Capture>())
+            var singleCharDelimiterCaptures = singleCharDelimiterGroup.Captures.OfType<Capture>();
+            var multiCharDelimiterCaptures = multiCharDelimiterGroup.Captures.OfType<Capture>();
+
+            var delimiters = singleCharDelimiterCaptures
+                .Concat(multiCharDelimiterCaptures)
                 .Select(capture => capture.Value)
                 .NormaliseForRegex();
 
