@@ -54,6 +54,7 @@ namespace StringCalculator
         [TestCase("//[*][%]\n1*2%3", 6)]
         [TestCase("//;_\n1_3;3", 7)]
         [TestCase("//[_=]\n1_=2", 3)]
+        [TestCase("//[#][@]\n1#2@3", 6)]
         public void DelimiterCanBeSpecified(string delimitersAndNumbers, int expected)
         {
             NumberSequenceReturnsTheSum(delimitersAndNumbers, expected);
