@@ -7,6 +7,7 @@ namespace StringCalculator.Parser
     public class MessageParser : IParser
     {
         private readonly Regex _defaultDelimiters;
+        private static readonly Regex DelimitersRegex = new Regex("//(?<delimiters>[^1-9])+\n");
 
         public MessageParser(IEnumerable<string> defaultDelimiters)
         {
@@ -16,15 +17,14 @@ namespace StringCalculator.Parser
 
         public IEnumerable<int> Parse(string message)
         {
-            var delimitersRegex = new Regex("//(?<delimiters>[^1-9])+\n");
-            var numbersString = delimitersRegex.Replace(message, string.Empty);
+            var numbersString = DelimitersRegex.Replace(message, string.Empty);
 
             if (string.IsNullOrEmpty(numbersString))
             {
                 return new int[0].AsEnumerable();
             }
 
-            var delimiters = delimitersRegex.Match(message)
+            var delimiters = DelimitersRegex.Match(message)
                 .Groups["delimiters"]
                 .Captures
                 .Cast<Capture>()
