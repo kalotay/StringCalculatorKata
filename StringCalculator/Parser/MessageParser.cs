@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace StringCalculator.Parser
 {
@@ -14,11 +15,27 @@ namespace StringCalculator.Parser
 
         public IEnumerable<int> Parse(string message)
         {
-            var numbers = string.IsNullOrEmpty(message)
-                              ? new int[0].AsEnumerable()
-                              : message.Split(_defaultDelimiters).Select(int.Parse);
+            var delimitersRegex = new Regex("//(?<delimiters>[^1-9])+\n");
+            var numbersString = delimitersRegex.Replace(message, string.Empty);
 
-            return numbers;
+            if (string.IsNullOrEmpty(numbersString))
+            {
+                return new int[0].AsEnumerable();
+            }
+
+            var delimiters = delimitersRegex.Match(message)
+                .Groups["delimiters"]
+                .Captures
+                .Cast<Capture>()
+                .Select(capture => Regex.Escape(capture.Value));
+
+            var delimiterRegexString = delimiters.Any()
+                              ? string.Join("|", delimiters)
+                              : string.Join("|", _defaultDelimiters);
+
+            var delimitersSplitter = new Regex(delimiterRegexString);
+
+            return delimitersSplitter.Split(numbersString).Select(int.Parse).AsEnumerable();
         }
     }
 }

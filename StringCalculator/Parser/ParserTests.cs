@@ -64,6 +64,17 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(2));
         }
 
+        [Test]
+        public void DelimitersCanBeSpecified()
+        {
+            var numbers = _parser.Parse("//;_\n1;0_-1");
+
+            Assert.That(numbers.Count(), Is.EqualTo(3));
+            Assert.That(numbers, Contains.Item(1));
+            Assert.That(numbers, Contains.Item(0));
+            Assert.That(numbers, Contains.Item(-1));
+
+        }
 
     }
 }
