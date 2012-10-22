@@ -85,5 +85,15 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(100));
         }
 
+        [Test]
+        public void MultiCharDelimitersCanContainNewlines()
+        {
+            var numbers = _parser.Parse("//[;\n]\n1;\n2");
+
+            Assert.That(numbers.Count(), Is.EqualTo(2));
+            Assert.That(numbers, Contains.Item(1));
+            Assert.That(numbers, Contains.Item(2));
+        }
+
     }
 }
