@@ -27,17 +27,6 @@ namespace StringCalculator
             var delimiters = _defaultDelimiters;
             var numbers = message;
 
-            if (message.StartsWith("//"))
-            {
-                var delimiterParserDriver = new DelimiterParserDriver(new DelimiterParser.DelimiterParser());
-                numbers = message.Substring(2);
-                
-                while (delimiterParserDriver.Read(numbers.First()))
-                {
-                    numbers = numbers.Substring(1);
-                }
-                delimiters = delimiterParserDriver.Delimiters.ToArray();
-            }
 
             _negativeNumberException = new NegativeNumberException();
 
