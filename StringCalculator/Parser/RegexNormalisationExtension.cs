@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace StringCalculator.Parser
 {
-    internal static class EnumerableStringExtensions
+    internal static class RegexNormalisationExtension
     {
         public static string NormaliseForRegex(this IEnumerable<string> delimiters)
         {

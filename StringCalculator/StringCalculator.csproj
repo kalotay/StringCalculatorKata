@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\EnumerableStringExtensions.cs" />
+    <Compile Include="Parser\RegexNormalisationExtension.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="Parser\IParser.cs" />
     <Compile Include="Parser\DelimiterParser.cs" />
