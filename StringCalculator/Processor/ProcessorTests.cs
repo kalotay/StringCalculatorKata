@@ -37,5 +37,13 @@ namespace StringCalculator.Processor
             Assert.That(sum, Is.EqualTo(10));
         }
 
+        [Test]
+        public void PositiveNumbersFrom1000AreIgnored()
+        {
+            var sum = _processor.Process(new[] {10000, 1000, 100, 10});
+
+            Assert.That(sum, Is.EqualTo(110));
+        }
+
     }
 }

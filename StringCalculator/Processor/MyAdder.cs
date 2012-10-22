@@ -7,7 +7,14 @@ namespace StringCalculator.Processor
     {
         public int Process(IEnumerable<int> numbers)
         {
-            return numbers.Sum();
+            return numbers.Aggregate(0, Add);
+        }
+
+        private int Add(int i1, int i2)
+        {
+            return i2 < 1000
+                       ? i1 + i2
+                       : i1;
         }
     }
 }
