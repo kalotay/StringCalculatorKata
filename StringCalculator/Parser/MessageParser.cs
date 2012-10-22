@@ -49,7 +49,8 @@ namespace StringCalculator.Parser
                 .Select(capture => capture.Value)
                 .NormaliseForRegex();
 
-            return new Regex(string.Join("|", delimiters));
+            var delimitersPattern = string.Join("|", delimiters);
+            return new Regex(delimitersPattern);
         }
     }
 
