@@ -6,11 +6,12 @@ namespace StringCalculator.Parser
 {
     public class MessageParser : IParser
     {
-        private readonly char[] _defaultDelimiters = new [] {',', '\n'};
+        private readonly Regex _defaultDelimiters;
 
-        public MessageParser(char[] defaultDelimiters)
+        public MessageParser(IEnumerable<string> defaultDelimiters)
         {
-            _defaultDelimiters = defaultDelimiters;
+            var regexString = string.Join("|", defaultDelimiters.Select(Regex.Escape));
+            _defaultDelimiters = new Regex(regexString);
         }
 
         public IEnumerable<int> Parse(string message)
@@ -29,11 +30,9 @@ namespace StringCalculator.Parser
                 .Cast<Capture>()
                 .Select(capture => Regex.Escape(capture.Value));
 
-            var delimiterRegexString = delimiters.Any()
-                              ? string.Join("|", delimiters)
-                              : string.Join("|", _defaultDelimiters);
-
-            var delimitersSplitter = new Regex(delimiterRegexString);
+            var delimitersSplitter = delimiters.Any()
+                                         ? new Regex(string.Join("|", delimiters))
+                                         : _defaultDelimiters;
 
             return delimitersSplitter.Split(numbersString).Select(int.Parse).AsEnumerable();
         }
