@@ -7,6 +7,11 @@ namespace StringCalculator.Parser
     {
         private char[] _defaultDelimiters = new [] {',', '\n'};
 
+        public MessageParser(char[] defaultDelimiters)
+        {
+            _defaultDelimiters = defaultDelimiters;
+        }
+
         public IEnumerable<int> Parse(string message)
         {
             _defaultDelimiters = new[] {',', '\n'};

@@ -11,7 +11,7 @@ namespace StringCalculator.Parser
         [SetUp]
         public void CreateParser()
         {
-            _parser = new MessageParser();
+            _parser = new MessageParser(new[] {',', '\n'});
         }
 
         [Test]
