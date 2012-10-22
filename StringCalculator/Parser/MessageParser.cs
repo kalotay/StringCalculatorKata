@@ -26,9 +26,8 @@ namespace StringCalculator.Parser
                 return new int[0].AsEnumerable();
             }
 
-            var delimitersSplitter = GetDelimitersSplitter(message);
-
-            return delimitersSplitter.Split(numbersString)
+            return GetDelimitersSplitter(message)
+                .Split(numbersString)
                 .Select(int.Parse)
                 .AsEnumerable();
         }
