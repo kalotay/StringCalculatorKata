@@ -34,9 +34,10 @@ namespace StringCalculator.Parser
 
         private Regex GetDelimitersSplitter(string message)
         {
-            var singleCharDelimiters = GetDelimitersGroup(message, "singlechar");
-
-            var multiCharDelimiters = GetDelimitersGroup(message, "multichar");
+            var delimiterGroups = DelimitersRegex.Match(message)
+                .Groups;
+            var singleCharDelimiters = delimiterGroups["singlechar"];
+            var multiCharDelimiters = delimiterGroups["multichar"];
 
             if ((singleCharDelimiters.Length + multiCharDelimiters.Length) < 1)
             {
@@ -48,14 +49,7 @@ namespace StringCalculator.Parser
                 .Select(capture => capture.Value)
                 .NormaliseForRegex();
 
-
             return new Regex(string.Join("|", delimiters));
-        }
-
-        private static Group GetDelimitersGroup(string message, string type)
-        {
-            return DelimitersRegex.Match(message)
-                .Groups[type];
         }
     }
 
