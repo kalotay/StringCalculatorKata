@@ -6,11 +6,11 @@ namespace StringCalculator.Parser
 {
     internal static class RegexNormalisationExtension
     {
-        public static string NormaliseForRegex(this IEnumerable<string> delimiters)
+        public static string NormaliseForRegex(this IEnumerable<string> tokens)
         {
-            var delimitersStrings = delimiters.Select(Regex.Escape)
+            var orderedEscapedTokens = tokens.Select(Regex.Escape)
                 .OrderByDescending(s => s.Length);
-            return string.Join("|", delimitersStrings);
+            return string.Join("|", orderedEscapedTokens);
         }
 
     }
