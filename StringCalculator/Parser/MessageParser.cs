@@ -28,7 +28,8 @@ namespace StringCalculator.Parser
                 .Groups["delimiters"]
                 .Captures
                 .Cast<Capture>()
-                .Select(capture => Regex.Escape(capture.Value));
+                .Select(capture => Regex.Escape(capture.Value))
+                .ToArray();
 
             var delimitersSplitter = delimiters.Any()
                                          ? new Regex(string.Join("|", delimiters))
