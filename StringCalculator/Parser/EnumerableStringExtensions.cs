@@ -6,10 +6,11 @@ namespace StringCalculator.Parser
 {
     internal static class EnumerableStringExtensions
     {
-        public static IEnumerable<string> NormaliseForRegex(this IEnumerable<string> delimiters)
+        public static string NormaliseForRegex(this IEnumerable<string> delimiters)
         {
-            return delimiters.Select(Regex.Escape)
+            var delimitersStrings = delimiters.Select(Regex.Escape)
                 .OrderByDescending(s => s.Length);
+            return string.Join("|", delimitersStrings);
         }
 
     }

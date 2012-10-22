@@ -31,8 +31,7 @@ namespace StringCalculator.Parser
 
         public DelimiterParser(IEnumerable<string> defaultDelimiters)
         {
-            var regexString = string.Join("|", defaultDelimiters.NormaliseForRegex());
-            _defaultDelimiters = new Regex(regexString);
+            _defaultDelimiters = new Regex(defaultDelimiters.NormaliseForRegex());
         }
 
         public IEnumerable<int> Parse(string message)
@@ -70,8 +69,7 @@ namespace StringCalculator.Parser
                 .Select(capture => capture.Value)
                 .NormaliseForRegex();
 
-            var delimitersPattern = string.Join("|", delimiters);
-            return new Regex(delimitersPattern);
+            return new Regex(delimiters);
         }
     }
 }
