@@ -41,7 +41,7 @@ namespace StringCalculator.Parser
 
             if (string.IsNullOrEmpty(numbersString))
             {
-                return new int[0].AsEnumerable();
+                return Enumerable.Empty<int>();
             }
 
             return GetDelimitersSplitter(message)
