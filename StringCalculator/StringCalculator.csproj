@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NegativeNumberException.cs" />
-    <Compile Include="ParserTerminatedException.cs" />
     <Compile Include="Parser\HeaderParser.cs" />
     <Compile Include="Parser\IParser.cs" />
     <Compile Include="Processor\IProcessor.cs" />
