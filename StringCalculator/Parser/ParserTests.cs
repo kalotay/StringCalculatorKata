@@ -95,5 +95,16 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(2));
         }
 
+        [Test]
+        public void MultiCharDelimitersCanContainOpeningSquareBrace()
+        {
+            var numbers = _parser.Parse("//[;[]\n1;[2");
+
+            Assert.That(numbers.Count(), Is.EqualTo(2));
+            Assert.That(numbers, Contains.Item(1));
+            Assert.That(numbers, Contains.Item(2));
+        }
+
+
     }
 }
