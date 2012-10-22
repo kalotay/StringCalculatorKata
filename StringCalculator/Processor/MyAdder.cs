@@ -12,12 +12,17 @@ namespace StringCalculator.Processor
             _negativeNumbers = new List<int>();
             var sum = numbers.Aggregate(0, Add);
 
+            CheckForNegatives();
+
+            return sum;
+        }
+
+        private void CheckForNegatives()
+        {
             if (_negativeNumbers.Any())
             {
                 throw new NegativeNumberException(_negativeNumbers);
             }
-
-            return sum;
         }
 
         private int Add(int accumulator, int next)
