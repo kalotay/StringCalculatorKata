@@ -51,7 +51,7 @@
     <Compile Include="Parser\EnumerableStringExtensions.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="Parser\IParser.cs" />
-    <Compile Include="Parser\MessageParser.cs" />
+    <Compile Include="Parser\DelimiterParser.cs" />
     <Compile Include="Parser\ParserTests.cs" />
     <Compile Include="Processor\IProcessor.cs" />
     <Compile Include="Processor\Adder.cs" />

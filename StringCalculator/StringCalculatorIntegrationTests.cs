@@ -8,7 +8,7 @@ namespace StringCalculator
     [TestFixture]
     public class StringCalculatorIntegrationTests
     {
-        private readonly StringCalculator _stringCalculator = new StringCalculator(new MessageParser(new[] {",", "\n"}), new Adder());
+        private readonly StringCalculator _stringCalculator = new StringCalculator(new DelimiterParser(new[] {",", "\n"}), new Adder());
 
         [Test]
         public void EmptyStringReturnsZero()

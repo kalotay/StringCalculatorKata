@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace StringCalculator.Parser
 {
-    public class MessageParser : IParser
+    public class DelimiterParser : IParser
     {
         private static readonly Regex DelimitersRegex = new Regex("//((?<singlechar>[^0-9\n[])|"
             + Regex.Escape("[")
@@ -12,7 +12,7 @@ namespace StringCalculator.Parser
 
         private readonly Regex _defaultDelimiters;
 
-        public MessageParser(IEnumerable<string> defaultDelimiters)
+        public DelimiterParser(IEnumerable<string> defaultDelimiters)
         {
             var regexString = string.Join("|", defaultDelimiters.NormaliseForRegex());
             _defaultDelimiters = new Regex(regexString);
