@@ -34,27 +34,28 @@ namespace StringCalculator.Parser
 
         private Regex GetDelimitersSplitter(string message)
         {
-            var singleCharDelimiters = DelimitersRegex.Match(message)
-                .Groups["singlechar"]
-                .Captures;
+            var singleCharDelimiters = GetDelimitersGroup(message, "singlechar");
 
-            var multiCharDelimiters = DelimitersRegex.Match(message)
-                .Groups["multichar"]
-                .Captures;
+            var multiCharDelimiters = GetDelimitersGroup(message, "multichar");
 
-            if ((singleCharDelimiters.Count + multiCharDelimiters.Count) < 1)
+            if ((singleCharDelimiters.Length + multiCharDelimiters.Length) < 1)
             {
                 return _defaultDelimiters;
             }
 
-
-            var delimiters = singleCharDelimiters.Cast<Capture>()
-                .Concat(multiCharDelimiters.Cast<Capture>())
+            var delimiters = singleCharDelimiters.Captures.Cast<Capture>()
+                .Concat(multiCharDelimiters.Captures.Cast<Capture>())
                 .Select(capture => Regex.Escape(capture.Value))
                 .OrderByDescending(s => s.Length)
                 .ToArray();
 
             return new Regex(string.Join("|", delimiters));
+        }
+
+        private static Group GetDelimitersGroup(string message, string type)
+        {
+            return DelimitersRegex.Match(message)
+                .Groups[type];
         }
     }
 }
