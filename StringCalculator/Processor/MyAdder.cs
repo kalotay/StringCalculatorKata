@@ -20,17 +20,17 @@ namespace StringCalculator.Processor
             return sum;
         }
 
-        private int Add(int i1, int i2)
+        private int Add(int accumulator, int next)
         {
-            if (i2 < 0)
+            if (next < 0)
             {
-                _negativeNumbers.Add(i2);
-                return i1;
+                _negativeNumbers.Add(next);
+                return accumulator;
             }
 
-            return i2 < 1000
-                       ? i1 + i2
-                       : i1;
+            return next < 1000
+                       ? accumulator + next
+                       : accumulator;
         }
     }
 }
