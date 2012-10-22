@@ -16,7 +16,7 @@ namespace StringCalculator.Parser
         }
 
         [Test]
-        public void emptyStringReturnsEmpty()
+        public void EmptyStringReturnsEmpty()
         {
             var numbers = _parser.Parse(string.Empty);
 
