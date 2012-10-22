@@ -25,9 +25,9 @@ namespace StringCalculator.Parser
         [Test]
         public void SingleNumberStringReturnsSingleItemSequenceWithNumber()
         {
-            var number = _parser.Parse("16").ToArray();
+            var number = _parser.Parse("16");
 
-            Assert.That(number.Length, Is.EqualTo(1));
+            Assert.That(number.Count(), Is.EqualTo(1));
             Assert.That(number, Contains.Item(16));
         }
 
