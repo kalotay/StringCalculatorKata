@@ -6,7 +6,7 @@ using StringCalculator.Processor;
 namespace StringCalculator
 {
     [TestFixture]
-    public class StringCalculatorTests
+    public class StringCalculatorIntegrationTests
     {
         private readonly StringCalculator _stringCalculator = new StringCalculator(new MessageParser(new[] {",", "\n"}), new MyAdder());
 

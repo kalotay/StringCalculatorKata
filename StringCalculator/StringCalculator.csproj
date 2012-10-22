@@ -53,7 +53,7 @@
     <Compile Include="Processor\NegativeNumberException.cs" />
     <Compile Include="Processor\ProcessorTests.cs" />
     <Compile Include="StringCalculator.cs" />
-    <Compile Include="StringCalculatorTests.cs" />
+    <Compile Include="StringCalculatorIntegrationTests.cs" />
     <Compile Include="DelimitersAndNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
