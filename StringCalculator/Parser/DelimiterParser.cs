@@ -10,9 +10,9 @@ namespace StringCalculator.Parser
             + "(" //then match...
                 + "(?<singlechar>[^0-9\n[])" //a single character delimiter (anything but digits, "[" and newlines)
                 + "|" //or
-                + Regex.Escape("[")
+                + Regex.Escape("[") //if there is a "["
                     + "(?<multichar>[^]0-9]+)" //a multicharacter delimiter (anything but digits and "]" at least once)
-                + "]"
+                + "]" //until "]"
             +")+" //...at least once
             + "\n"); //end with newline
 
