@@ -50,6 +50,8 @@
     <Compile Include="Parser\MessageParser.cs" />
     <Compile Include="Parser\ParserTests.cs" />
     <Compile Include="Processor\IProcessor.cs" />
+    <Compile Include="Processor\MyAdder.cs" />
+    <Compile Include="Processor\ProcessorTests.cs" />
     <Compile Include="StringCalculator.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="DelimitersAndNumbers.cs" />
