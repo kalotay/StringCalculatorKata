@@ -6,9 +6,15 @@ namespace StringCalculator.Parser
 {
     public class DelimiterParser : IParser
     {
-        private static readonly Regex DelimitersRegex = new Regex("//((?<singlechar>[^0-9\n[])|"
-            + Regex.Escape("[")
-            + "(?<multichar>[^]0-9]+)])+\n");
+        private static readonly Regex DelimitersRegex = new Regex("//" //starts with "//"
+            + "(" //then match...
+                + "(?<singlechar>[^0-9\n[])" //a single character delimiter (anything but digits, "[" and newlines)
+                + "|" //or
+                + Regex.Escape("[")
+                    + "(?<multichar>[^]0-9]+)" //a multicharacter delimiter (anything but digits and "]" at least once)
+                + "]"
+            +")+" //...at least once
+            + "\n"); //end with newline
 
         private readonly Regex _defaultDelimiters;
 
