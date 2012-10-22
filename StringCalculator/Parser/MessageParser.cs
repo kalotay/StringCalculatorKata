@@ -24,6 +24,15 @@ namespace StringCalculator.Parser
                 return new int[0].AsEnumerable();
             }
 
+            var delimitersSplitter = GetDelimitersSplitter(message);
+
+            return delimitersSplitter.Split(numbersString)
+                .Select(int.Parse)
+                .AsEnumerable();
+        }
+
+        private Regex GetDelimitersSplitter(string message)
+        {
             var delimiters = DelimitersRegex.Match(message)
                 .Groups["delimiters"]
                 .Captures
@@ -34,8 +43,7 @@ namespace StringCalculator.Parser
             var delimitersSplitter = delimiters.Any()
                                          ? new Regex(string.Join("|", delimiters))
                                          : _defaultDelimiters;
-
-            return delimitersSplitter.Split(numbersString).Select(int.Parse).AsEnumerable();
+            return delimitersSplitter;
         }
     }
 }
