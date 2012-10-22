@@ -9,12 +9,17 @@ namespace StringCalculator.Processor
 
         public int Process(IEnumerable<int> numbers)
         {
-            _negativeNumbers = new List<int>();
-            var sum = numbers.Aggregate(0, Add);
+            var sum = SumUp(numbers);
 
             CheckForNegatives();
 
             return sum;
+        }
+
+        private int SumUp(IEnumerable<int> numbers)
+        {
+            _negativeNumbers = new List<int>();
+            return numbers.Aggregate(0, Add);
         }
 
         private void CheckForNegatives()
