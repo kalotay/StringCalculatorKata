@@ -51,5 +51,11 @@ namespace StringCalculator.Processor
             Assert.Throws<NegativeNumberException>(() => _processor.Process(new[] {-1}));
         }
 
+        [Test]
+        public void NegativeNumberExceptionsMessageContainsNegativeNumberSequence()
+        {
+            var exception = Assert.Throws<NegativeNumberException>(() => _processor.Process(new[] {-1, 2, -5}));
+            Assert.That(exception.Message, Is.StringContaining("-1, -5"));
+        }
     }
 }

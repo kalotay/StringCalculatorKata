@@ -1,24 +1,21 @@
 using System;
+using System.Collections.Generic;
 
 namespace StringCalculator.Processor
 {
     internal class NegativeNumberException : Exception
     {
-        private string _message = "Received following negative numbers:";
+        private readonly string _message;
+        private const string MessagePrefix = "Received following negative numbers:";
 
-        public void Add(string number)
+        public NegativeNumberException(IEnumerable<int> negativeNumbers)
         {
-            _message += (" " + number);
+            _message  = MessagePrefix + string.Join(", ", negativeNumbers);
         }
 
         public override string Message
         {
             get { return _message; }
-        }
-
-        public bool IsEmpty()
-        {
-            return Message == "Received following negative numbers:";
         }
     }
 }

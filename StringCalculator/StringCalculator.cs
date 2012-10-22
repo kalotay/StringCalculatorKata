@@ -29,13 +29,9 @@ namespace StringCalculator
             var numbers = message;
 
 
-            _negativeNumberException = new NegativeNumberException();
+            _negativeNumberException = new NegativeNumberException(new List<int>());
 
             var result = numbers.Split(delimiters.Select(s => s.First()).ToArray()).Sum(number => ParserNumber(number));
-            if (!_negativeNumberException.IsEmpty())
-            {
-                throw _negativeNumberException;
-            }
             return result;
         }
 
@@ -44,7 +40,6 @@ namespace StringCalculator
             var value = int.Parse(number);
             if (value < 0)
             {
-                _negativeNumberException.Add(number);
             }
             return value < 1000 ? value : 0;
         }
