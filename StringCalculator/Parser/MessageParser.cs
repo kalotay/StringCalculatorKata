@@ -9,7 +9,7 @@ namespace StringCalculator.Parser
         {
             var numbers = string.IsNullOrEmpty(message)
                               ? new int[0].AsEnumerable()
-                              : message.Split(',').Select(int.Parse);
+                              : message.Split(new char[] {',', '\n'}).Select(int.Parse);
 
             return numbers;
         }

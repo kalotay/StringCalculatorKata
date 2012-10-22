@@ -42,5 +42,17 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(8));
         }
 
+        [Test]
+        public void NumbersCanBeNewlineSeparated()
+        {
+            var numbers = _parser.Parse("7\n6\n5");
+
+            Assert.That(numbers.Count(), Is.EqualTo(3));
+            Assert.That(numbers, Contains.Item(7));
+            Assert.That(numbers, Contains.Item(6));
+            Assert.That(numbers, Contains.Item(5));
+        }
+
+
     }
 }
