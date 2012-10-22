@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace StringCalculator.Processor
 {
-    internal class NegativeNumberException : Exception
+    public class NegativeNumberException : Exception
     {
         private readonly string _message;
-        private const string MessagePrefix = "Received following negative numbers:";
+        private const string MessagePrefix = "Received following negative numbers: ";
 
         public NegativeNumberException(IEnumerable<int> negativeNumbers)
         {

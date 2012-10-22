@@ -1,47 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using StringCalculator.Parser;
 using StringCalculator.Processor;
 
 namespace StringCalculator
 {
     public class StringCalculator
     {
-        private readonly string[] _defaultDelimiters;
-        private NegativeNumberException _negativeNumberException;
+        private readonly IParser _parser;
+        private readonly IProcessor _processor;
 
-        public StringCalculator(ISet<string> defaultDelimiters)
+        public StringCalculator(IParser parser, IProcessor processor)
         {
-            _defaultDelimiters = defaultDelimiters.ToArray();
+            _parser = parser;
+            _processor = processor;
         }
-
-        public StringCalculator(): this(new HashSet<string>{",", "\n"})
-        {}
 
         public int Add(string message)
         {
-            if (String.IsNullOrEmpty(message))
-            {
-                return 0;
-            }
-
-            var delimiters = _defaultDelimiters;
-            var numbers = message;
-
-
-            _negativeNumberException = new NegativeNumberException(new List<int>());
-
-            var result = numbers.Split(delimiters.Select(s => s.First()).ToArray()).Sum(number => ParserNumber(number));
-            return result;
-        }
-
-        private int ParserNumber(string number)
-        {
-            var value = int.Parse(number);
-            if (value < 0)
-            {
-            }
-            return value < 1000 ? value : 0;
+            var numbers = _parser.Parse(message);
+            return _processor.Process(numbers);
         }
     }
 }

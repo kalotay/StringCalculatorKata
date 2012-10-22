@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using StringCalculator.Parser;
 using StringCalculator.Processor;
 
 namespace StringCalculator
@@ -7,7 +8,7 @@ namespace StringCalculator
     [TestFixture]
     public class StringCalculatorTests
     {
-        private readonly StringCalculator _stringCalculator = new StringCalculator();
+        private readonly StringCalculator _stringCalculator = new StringCalculator(new MessageParser(new[] {",", "\n"}), new MyAdder());
 
         [Test]
         public void EmptyStringReturnsZero()
@@ -67,7 +68,7 @@ namespace StringCalculator
         public void TwoNegativeNumbersAreBothReportedInException()
         {
             var exception = Assert.Throws<NegativeNumberException>(() => _stringCalculator.Add("-1,-2"));
-            Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1 -2"));
+            Assert.That(exception.Message, Is.EqualTo("Received following negative numbers: -1, -2"));
         }
 
         [TestCase("1000", 0)]
