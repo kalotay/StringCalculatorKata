@@ -29,5 +29,13 @@ namespace StringCalculator.Processor
             Assert.That(sum, Is.EqualTo(10));
         }
 
+        [Test]
+        public void PositiveNumberSequenceReturnsTheSum()
+        {
+            var sum = _processor.Process(new[] {1, 2, 3, 4});
+
+            Assert.That(sum, Is.EqualTo(10));
+        }
+
     }
 }
