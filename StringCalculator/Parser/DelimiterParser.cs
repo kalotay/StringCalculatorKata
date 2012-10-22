@@ -43,13 +43,13 @@ namespace StringCalculator.Parser
                 return Enumerable.Empty<int>();
             }
 
-            return GetDelimitersSplitter(message)
+            return GetSplitter(message)
                 .Split(numbersString)
                 .Select(int.Parse)
                 .AsEnumerable();
         }
 
-        private Regex GetDelimitersSplitter(string message)
+        private Regex GetSplitter(string message)
         {
             var delimiterGroups = DelimitersRegex.Match(message)
                 .Groups;
