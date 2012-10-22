@@ -45,5 +45,11 @@ namespace StringCalculator.Processor
             Assert.That(sum, Is.EqualTo(110));
         }
 
+        [Test]
+        public void SequencesWithNegativeNumbersThrowException()
+        {
+            Assert.Throws<NegativeNumberException>(() => _processor.Process(new[] {-1}));
+        }
+
     }
 }

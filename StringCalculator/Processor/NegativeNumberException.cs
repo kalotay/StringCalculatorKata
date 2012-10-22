@@ -1,6 +1,6 @@
 using System;
 
-namespace StringCalculator
+namespace StringCalculator.Processor
 {
     internal class NegativeNumberException : Exception
     {

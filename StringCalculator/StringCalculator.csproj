@@ -45,12 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NegativeNumberException.cs" />
     <Compile Include="Parser\IParser.cs" />
     <Compile Include="Parser\MessageParser.cs" />
     <Compile Include="Parser\ParserTests.cs" />
     <Compile Include="Processor\IProcessor.cs" />
     <Compile Include="Processor\MyAdder.cs" />
+    <Compile Include="Processor\NegativeNumberException.cs" />
     <Compile Include="Processor\ProcessorTests.cs" />
     <Compile Include="StringCalculator.cs" />
     <Compile Include="StringCalculatorTests.cs" />
