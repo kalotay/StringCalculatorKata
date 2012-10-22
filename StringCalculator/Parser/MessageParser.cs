@@ -36,19 +36,21 @@ namespace StringCalculator.Parser
         private Regex GetDelimitersSplitter(string message)
         {
             var singleCharDelimiters = DelimitersRegex.Match(message)
-                .Groups["singlechar"];
+                .Groups["singlechar"]
+                .Captures;
 
             var multiCharDelimiters = DelimitersRegex.Match(message)
-                .Groups["multichar"];
+                .Groups["multichar"]
+                .Captures;
 
-            var delimitersGroups = singleCharDelimiters.Captures.Cast<Capture>()
-                .Concat(multiCharDelimiters.Captures.Cast<Capture>())
-                .ToArray();
-
-            if (!delimitersGroups.Any())
+            if ((singleCharDelimiters.Count + multiCharDelimiters.Count) < 1)
             {
                 return _defaultDelimiters;
             }
+
+            var delimitersGroups = singleCharDelimiters.Cast<Capture>()
+                .Concat(multiCharDelimiters.Cast<Capture>())
+                .ToArray();
 
 
             var delimiters = delimitersGroups
