@@ -5,12 +5,12 @@ namespace StringCalculator.Processor
     [TestFixture]
     class ProcessorTests
     {
-        private MyAdder _processor;
+        private Adder _processor;
 
         [SetUp]
         public void CreateProcessor()
         {
-            _processor = new MyAdder();
+            _processor = new Adder();
         }
 
         [Test]

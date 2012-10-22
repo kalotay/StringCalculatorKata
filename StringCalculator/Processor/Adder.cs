@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace StringCalculator.Processor
 {
-    public class MyAdder: IProcessor
+    public class Adder: IProcessor
     {
         private IList<int> _negativeNumbers;
 
