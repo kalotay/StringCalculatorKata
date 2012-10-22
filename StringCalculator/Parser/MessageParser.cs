@@ -33,17 +33,21 @@ namespace StringCalculator.Parser
 
         private Regex GetDelimitersSplitter(string message)
         {
-            var delimiters = DelimitersRegex.Match(message)
-                .Groups["delimiters"]
-                .Captures
+            var delimitersGroups = DelimitersRegex.Match(message)
+                .Groups["delimiters"];
+
+            if (delimitersGroups.Length == 0)
+            {
+                return _defaultDelimiters;
+            }
+
+
+            var delimiters = delimitersGroups.Captures
                 .Cast<Capture>()
                 .Select(capture => Regex.Escape(capture.Value))
                 .ToArray();
 
-            var delimitersSplitter = delimiters.Any()
-                                         ? new Regex(string.Join("|", delimiters))
-                                         : _defaultDelimiters;
-            return delimitersSplitter;
+            return new Regex(string.Join("|", delimiters));
         }
     }
 }
