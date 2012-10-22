@@ -13,8 +13,7 @@ namespace StringCalculator.Parser
 
         public MessageParser(IEnumerable<string> defaultDelimiters)
         {
-            var normalisedDefaultDelimiters = NormaliseForRegex(defaultDelimiters);
-            var regexString = string.Join("|", normalisedDefaultDelimiters);
+            var regexString = string.Join("|", defaultDelimiters.NormaliseForRegex());
             _defaultDelimiters = new Regex(regexString);
         }
 
@@ -46,17 +45,11 @@ namespace StringCalculator.Parser
 
             var delimiters = singleCharDelimiters.Captures.Cast<Capture>()
                 .Concat(multiCharDelimiters.Captures.Cast<Capture>())
-                .Select(capture => capture.Value);
+                .Select(capture => capture.Value)
+                .NormaliseForRegex();
 
-            var normalisedDelimiters = NormaliseForRegex(delimiters);
 
-            return new Regex(string.Join("|", normalisedDelimiters));
-        }
-
-        private static IEnumerable<string> NormaliseForRegex(IEnumerable<string> delimiters)
-        {
-            return delimiters.Select(Regex.Escape)
-                .OrderByDescending(s => s.Length);
+            return new Regex(string.Join("|", delimiters));
         }
 
         private static Group GetDelimitersGroup(string message, string type)
@@ -64,5 +57,15 @@ namespace StringCalculator.Parser
             return DelimitersRegex.Match(message)
                 .Groups[type];
         }
+    }
+
+    internal static class EnumerableStringExtensions
+    {
+        public static IEnumerable<string> NormaliseForRegex(this IEnumerable<string> delimiters)
+        {
+            return delimiters.Select(Regex.Escape)
+                .OrderByDescending(s => s.Length);
+        }
+
     }
 }
