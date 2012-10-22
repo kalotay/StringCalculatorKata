@@ -1,9 +1,9 @@
 using System;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace StringCalculator
+namespace StringCalculator.Parser
 {
     public class HeaderParser : IParser
     {
