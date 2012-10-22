@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace StringCalculator.Parser
 {
@@ -21,14 +19,6 @@ namespace StringCalculator.Parser
             var numbers = _parser.Parse(string.Empty);
 
             Assert.That(numbers, Is.Empty);
-        }
-    }
-
-    internal class MessageParser : IParser
-    {
-        public IEnumerable<int> Parse(string message)
-        {
-            return (new int[0]).AsEnumerable();
         }
     }
 }

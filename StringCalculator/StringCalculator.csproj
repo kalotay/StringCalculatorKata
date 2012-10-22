@@ -48,6 +48,7 @@
     <Compile Include="NegativeNumberException.cs" />
     <Compile Include="Parser\HeaderParser.cs" />
     <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Parser\MessageParser.cs" />
     <Compile Include="Parser\ParserTests.cs" />
     <Compile Include="Processor\IProcessor.cs" />
     <Compile Include="StringCalculator.cs" />
