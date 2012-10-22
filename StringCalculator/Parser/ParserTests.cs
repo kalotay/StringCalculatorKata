@@ -105,6 +105,17 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(2));
         }
 
+        [Test]
+        public void MultiCharacterDelimiterSubsetOfAnotherCanBeSpecified()
+        {
+            var numbers = _parser.Parse("//[aa][aaa]\n1aaa2aa3");
+
+            Assert.That(numbers.Count(), Is.EqualTo(3));
+            Assert.That(numbers, Contains.Item(1));
+            Assert.That(numbers, Contains.Item(2));
+            Assert.That(numbers, Contains.Item(3));
+        }
+
 
     }
 }

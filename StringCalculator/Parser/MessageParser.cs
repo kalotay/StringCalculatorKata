@@ -9,7 +9,7 @@ namespace StringCalculator.Parser
         private readonly Regex _defaultDelimiters;
         private static readonly Regex DelimitersRegex = new Regex("//((?<singlechar>[^0-9\n[])|"
             + Regex.Escape("[")
-            + "(?<multichar>[^0-9]+)])+\n");
+            + "(?<multichar>[^]0-9]+)])+\n");
 
         public MessageParser(IEnumerable<string> defaultDelimiters)
         {
@@ -48,13 +48,11 @@ namespace StringCalculator.Parser
                 return _defaultDelimiters;
             }
 
-            var delimitersGroups = singleCharDelimiters.Cast<Capture>()
+
+            var delimiters = singleCharDelimiters.Cast<Capture>()
                 .Concat(multiCharDelimiters.Cast<Capture>())
-                .ToArray();
-
-
-            var delimiters = delimitersGroups
                 .Select(capture => Regex.Escape(capture.Value))
+                .OrderByDescending(s => s.Length)
                 .ToArray();
 
             return new Regex(string.Join("|", delimiters));
