@@ -8,10 +8,10 @@ namespace StringCalculator.Parser
         public IEnumerable<int> Parse(string message)
         {
             var numbers = string.IsNullOrEmpty(message)
-                              ? new int[0]
-                              : new[] {int.Parse(message)};
+                              ? new int[0].AsEnumerable()
+                              : message.Split(',').Select(int.Parse);
 
-            return numbers.AsEnumerable();
+            return numbers;
         }
     }
 }

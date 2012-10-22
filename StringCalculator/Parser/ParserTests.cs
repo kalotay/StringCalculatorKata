@@ -31,5 +31,16 @@ namespace StringCalculator.Parser
             Assert.That(number, Contains.Item(16));
         }
 
+        [Test]
+        public void NumbersCanBeCommaSeparated()
+        {
+            var numbers = _parser.Parse("10,9,8");
+
+            Assert.That(numbers.Count(), Is.EqualTo(3));
+            Assert.That(numbers, Contains.Item(10));
+            Assert.That(numbers, Contains.Item(9));
+            Assert.That(numbers, Contains.Item(8));
+        }
+
     }
 }
