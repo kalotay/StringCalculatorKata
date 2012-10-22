@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 
 namespace StringCalculator.Parser
 {
@@ -20,5 +21,15 @@ namespace StringCalculator.Parser
 
             Assert.That(numbers, Is.Empty);
         }
+
+        [Test]
+        public void SingleNumberStringReturnsSingleItemSequenceWithNumber()
+        {
+            var number = _parser.Parse("16").ToArray();
+
+            Assert.That(number.Length, Is.EqualTo(1));
+            Assert.That(number, Contains.Item(16));
+        }
+
     }
 }

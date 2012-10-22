@@ -7,7 +7,11 @@ namespace StringCalculator.Parser
     {
         public IEnumerable<int> Parse(string message)
         {
-            return (new int[0]).AsEnumerable();
+            var numbers = string.IsNullOrEmpty(message)
+                              ? new int[0]
+                              : new[] {int.Parse(message)};
+
+            return numbers.AsEnumerable();
         }
     }
 }
