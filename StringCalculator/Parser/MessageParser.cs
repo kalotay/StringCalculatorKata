@@ -7,7 +7,9 @@ namespace StringCalculator.Parser
     public class MessageParser : IParser
     {
         private readonly Regex _defaultDelimiters;
-        private static readonly Regex DelimitersRegex = new Regex("//(?<delimiters>[^1-9])+\n");
+        private static readonly Regex DelimitersRegex = new Regex("//((?<singlechar>[^0-9\n[])|"
+            + Regex.Escape("[")
+            + "(?<multichar>[^0-9]+)])+\n");
 
         public MessageParser(IEnumerable<string> defaultDelimiters)
         {
@@ -33,17 +35,23 @@ namespace StringCalculator.Parser
 
         private Regex GetDelimitersSplitter(string message)
         {
-            var delimitersGroups = DelimitersRegex.Match(message)
-                .Groups["delimiters"];
+            var singleCharDelimiters = DelimitersRegex.Match(message)
+                .Groups["singlechar"];
 
-            if (delimitersGroups.Length == 0)
+            var multiCharDelimiters = DelimitersRegex.Match(message)
+                .Groups["multichar"];
+
+            var delimitersGroups = singleCharDelimiters.Captures.Cast<Capture>()
+                .Concat(multiCharDelimiters.Captures.Cast<Capture>())
+                .ToArray();
+
+            if (!delimitersGroups.Any())
             {
                 return _defaultDelimiters;
             }
 
 
-            var delimiters = delimitersGroups.Captures
-                .Cast<Capture>()
+            var delimiters = delimitersGroups
                 .Select(capture => Regex.Escape(capture.Value))
                 .ToArray();
 

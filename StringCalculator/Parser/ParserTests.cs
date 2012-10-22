@@ -73,7 +73,16 @@ namespace StringCalculator.Parser
             Assert.That(numbers, Contains.Item(1));
             Assert.That(numbers, Contains.Item(0));
             Assert.That(numbers, Contains.Item(-1));
+        }
 
+        [Test]
+        public void MultiCharDelimitersCanBeSpecified()
+        {
+            var numbers = _parser.Parse("//[_:]\n1000_:100");
+
+            Assert.That(numbers.Count(), Is.EqualTo(2));
+            Assert.That(numbers, Contains.Item(1000));
+            Assert.That(numbers, Contains.Item(100));
         }
 
     }
