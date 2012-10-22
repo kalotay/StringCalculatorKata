@@ -4,7 +4,7 @@ namespace StringCalculator
 {
 	public interface IParser
 	{
-		IEnumerable<int> Parser(string message);
+		IEnumerable<int> Parse(string message);
 	}
 }
 
