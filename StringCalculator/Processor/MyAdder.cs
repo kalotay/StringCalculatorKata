@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StringCalculator.Processor
 {
@@ -6,7 +7,7 @@ namespace StringCalculator.Processor
     {
         public int Process(IEnumerable<int> numbers)
         {
-            return default(int);
+            return numbers.Sum();
         }
     }
 }
