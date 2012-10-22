@@ -6,10 +6,11 @@ namespace StringCalculator.Parser
 {
     public class MessageParser : IParser
     {
-        private readonly Regex _defaultDelimiters;
         private static readonly Regex DelimitersRegex = new Regex("//((?<singlechar>[^0-9\n[])|"
             + Regex.Escape("[")
             + "(?<multichar>[^]0-9]+)])+\n");
+
+        private readonly Regex _defaultDelimiters;
 
         public MessageParser(IEnumerable<string> defaultDelimiters)
         {
