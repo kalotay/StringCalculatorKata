@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -56,7 +57,7 @@ namespace StringCalculator.Parser
             var singleCharDelimiterGroup = delimiterGroups["singlechar"];
             var multiCharDelimiterGroup = delimiterGroups["multichar"];
 
-            if ((singleCharDelimiterGroup.Length + multiCharDelimiterGroup.Length) < 1)
+            if (AreDelimiterGroupsEmpty(singleCharDelimiterGroup, multiCharDelimiterGroup))
             {
                 return _defaultDelimiters;
             }
@@ -70,6 +71,16 @@ namespace StringCalculator.Parser
                 .NormaliseForRegex();
 
             return new Regex(delimiters);
+        }
+
+        private static bool AreDelimiterGroupsEmpty(Capture singleCharDelimiterGroup, Capture multiCharDelimiterGroup)
+        {
+            if (singleCharDelimiterGroup == null || multiCharDelimiterGroup == null)
+            {
+                return true;
+            }
+
+            return (singleCharDelimiterGroup.Length + multiCharDelimiterGroup.Length) < 1;
         }
     }
 }
