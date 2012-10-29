@@ -20,7 +20,7 @@ namespace StringCalculator
             var processor = Substitute.For<IProcessor>();
             processor.Process(Arg.Any<IEnumerable<int>>()).Returns(0);
 
-            var stringCalculator = new StringCalculator(new string[0], processor);
+            var stringCalculator = new StringCalculator(parser, processor);
             var result = stringCalculator.Add(empty);
 
             Assert.That(result, Is.EqualTo(0));
