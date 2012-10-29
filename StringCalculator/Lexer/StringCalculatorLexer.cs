@@ -35,20 +35,22 @@ namespace StringCalculator.Lexer
                 var currentChar = _message[_position];
                 _position += 1;
 
-                if (currentChar == '\n')
+                switch (currentChar)
                 {
-                    hasDelimiterSpec = false;
-                    yield return StringCalculatorToken.DelimitersEnd;
-                }
-                else if (currentChar == '[')
-                {
-                    yield return StringCalculatorToken.MultiCharacterDelimiterStart;
-                    yield return EmitMultiCharacterDelimiterToken();
-                    yield return StringCalculatorToken.MultiCharacterDelimiterEnd;
-                }
-                else
-                {
-                    yield return EmitSingleCharacterDelimiterToken(currentChar);
+                    case '\n':
+                        hasDelimiterSpec = false;
+                        yield return StringCalculatorToken.DelimitersEnd;
+                        break;
+
+                    case '[':
+                        yield return StringCalculatorToken.MultiCharacterDelimiterStart;
+                        yield return EmitMultiCharacterDelimiterToken();
+                        yield return StringCalculatorToken.MultiCharacterDelimiterEnd;
+                        break;
+
+                    default:
+                        yield return EmitSingleCharacterDelimiterToken(currentChar);
+                        break;
                 }
             }
 
