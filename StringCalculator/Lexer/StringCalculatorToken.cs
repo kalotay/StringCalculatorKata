@@ -14,5 +14,10 @@
 
         public Types Type;
         public string Content;
+
+        public static readonly StringCalculatorToken DelimitersStart = new StringCalculatorToken {Type = Types.DelimitersStart};
+        public static readonly StringCalculatorToken DelimitersEnd = new StringCalculatorToken {Type = Types.DelimitersEnd};
+        public static readonly StringCalculatorToken MultiCharacterDelimiterStart = new StringCalculatorToken {Type = Types.MultiCharacterDelimterStart};
+        public static readonly StringCalculatorToken MultiCharacterDelimiterEnd = new StringCalculatorToken { Type = Types.MultiCharacterDelimiterEnd};
     }
 }

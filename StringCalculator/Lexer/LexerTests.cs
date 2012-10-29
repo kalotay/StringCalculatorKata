@@ -50,5 +50,29 @@ namespace StringCalculator.Lexer
             Assert.That(numbers.Type, Is.EqualTo(StringCalculatorToken.Types.Numbers));
             Assert.That(numbers.Content, Is.EqualTo("1;2_3"));
         }
+
+        [Test]
+        public void MultipleCaharacterDelimitersCanBeSpecified()
+        {
+            var lexer = new StringCalculatorLexer("//[:-]\n1:-2");
+            var tokens = lexer.Read().ToArray();
+            var delimiter = tokens[2];
+            var numbers = tokens[5];
+
+            Assert.That(tokens.Count(), Is.EqualTo(6));
+
+            Assert.That(tokens[0], Is.EqualTo(StringCalculatorToken.DelimitersStart));
+            Assert.That(tokens[1], Is.EqualTo(StringCalculatorToken.MultiCharacterDelimiterStart));
+
+            Assert.That(delimiter.Type, Is.EqualTo(StringCalculatorToken.Types.Delimiter));
+            Assert.That(delimiter.Content, Is.EqualTo(":-"));
+
+            Assert.That(tokens[3], Is.EqualTo(StringCalculatorToken.MultiCharacterDelimiterEnd));
+            Assert.That(tokens[4], Is.EqualTo(StringCalculatorToken.DelimitersEnd));
+
+            Assert.That(numbers.Type, Is.EqualTo(StringCalculatorToken.Types.Numbers));
+            Assert.That(numbers.Content, Is.EqualTo("1:-2"));
+        }
+
     }
 }

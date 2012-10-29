@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace StringCalculator.Lexer
 {
@@ -26,7 +27,7 @@ namespace StringCalculator.Lexer
             {
                 hasDelimiterSpec = true;
                 _position += 2;
-                yield return new StringCalculatorToken {Type = StringCalculatorToken.Types.DelimitersStart};
+                yield return StringCalculatorToken.DelimitersStart;
             }
 
             while (hasDelimiterSpec)
@@ -37,17 +38,39 @@ namespace StringCalculator.Lexer
                 if (currentChar == '\n')
                 {
                     hasDelimiterSpec = false;
-                    yield return new StringCalculatorToken {Type = StringCalculatorToken.Types.DelimitersEnd};
+                    yield return StringCalculatorToken.DelimitersEnd;
+                }
+                else if (currentChar == '[')
+                {
+                    yield return StringCalculatorToken.MultiCharacterDelimiterStart;
+                    var delimiterLength = 0;
+                    while (_message[_position + delimiterLength] != ']')
+                    {
+                        delimiterLength += 1;
+                    }
+                    yield return new StringCalculatorToken {Type = StringCalculatorToken.Types.Delimiter, Content = _message.Substring(_position, delimiterLength)};
+                    _position += (delimiterLength + 1);
+                    yield return StringCalculatorToken.MultiCharacterDelimiterEnd;
                 }
                 else
                 {
-                    yield return new StringCalculatorToken {Type = StringCalculatorToken.Types.Delimiter, Content = new string(currentChar, 1)};
+                    yield return EmitSingleCharacterDelimiterToken(currentChar);
                 }
             }
 
-            yield return new StringCalculatorToken {Content = _message.Substring(_position), Type = StringCalculatorToken.Types.Numbers};
-        }        
-        
+            yield return EmitNumbers();
+        }
+
+        private StringCalculatorToken EmitNumbers()
+        {
+            return new StringCalculatorToken {Content = _message.Substring(_position), Type = StringCalculatorToken.Types.Numbers};
+        }
+
+        private static StringCalculatorToken EmitSingleCharacterDelimiterToken(char currentChar)
+        {
+            return new StringCalculatorToken {Type = StringCalculatorToken.Types.Delimiter, Content = new string(currentChar, 1)};
+        }
+
         private void Reset()
         {
             _position = 0;
