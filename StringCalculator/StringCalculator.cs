@@ -1,22 +1,57 @@
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using StringCalculator.Lexer;
 using StringCalculator.Parser;
 using StringCalculator.Processor;
+using System.Linq;
 
 namespace StringCalculator
 {
     public class StringCalculator
     {
-        private readonly IParser _parser;
         private readonly IProcessor _processor;
+        private readonly Regex _defaultSplitter;
 
-        public StringCalculator(IParser parser, IProcessor processor)
+        public StringCalculator(IEnumerable<string> defaultDelimiters, IProcessor processor)
         {
-            _parser = parser;
             _processor = processor;
+            var delimitersRegexSpec = defaultDelimiters.NormaliseForRegex();
+            _defaultSplitter = new Regex(delimitersRegexSpec);
         }
 
         public int Add(string message)
         {
-            var numbers = _parser.Parse(message);
+            var lexer = new StringCalculatorLexer(message);
+            var delimiters = new HashSet<string>();
+            string numbersString = null;
+
+            foreach (var token in lexer.Read())
+            {
+                if (token.Type == StringCalculatorToken.Types.Delimiter)
+                {
+                    delimiters.Add(token.Content);
+                }
+
+                if (token.Type == StringCalculatorToken.Types.Numbers)
+                {
+                    numbersString = token.Content;
+                }
+            }
+
+            if (string.IsNullOrEmpty(numbersString))
+            {
+                return _processor.Process(Enumerable.Empty<int>());
+            }
+
+            var numberSplitter = delimiters.Any() ?
+                new Regex(delimiters.NormaliseForRegex()) :
+                _defaultSplitter;
+
+            var numbers = 
+                numberSplitter
+                .Split(numbersString)
+                .Select(int.Parse);
+
             return _processor.Process(numbers);
         }
     }
