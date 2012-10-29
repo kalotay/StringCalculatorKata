@@ -26,5 +26,15 @@
 
         public static readonly StringCalculatorToken MultiCharacterDelimiterEnd =
             new StringCalculatorToken {Type = Types.MultiCharacterDelimiterEnd, Content = "]"};
+
+        public static StringCalculatorToken DelimiterToken(string content)
+        {
+            return new StringCalculatorToken {Type = Types.Delimiter, Content = content};
+        }
+
+        public static StringCalculatorToken NumbersToken(string content)
+        {
+            return new StringCalculatorToken {Type = Types.Numbers, Content = content};
+        }
     }
 }

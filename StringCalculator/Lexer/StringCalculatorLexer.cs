@@ -65,21 +65,21 @@ namespace StringCalculator.Lexer
                 delimiterLength += 1;
             }
             _position += (delimiterLength + 1);
-            return new StringCalculatorToken
-                       {
-                           Type = StringCalculatorToken.Types.Delimiter,
-                           Content = _message.Substring(delimiterStart, delimiterLength)
-                       };
+            var delimiter = _message.Substring(delimiterStart, delimiterLength);
+
+            return StringCalculatorToken.DelimiterToken(delimiter);
         }
 
         private StringCalculatorToken EmitNumbers()
         {
-            return new StringCalculatorToken {Content = _message.Substring(_position), Type = StringCalculatorToken.Types.Numbers};
+            var numbers = _message.Substring(_position);
+            return StringCalculatorToken.NumbersToken(numbers);
         }
 
         private static StringCalculatorToken EmitSingleCharacterDelimiterToken(char currentChar)
         {
-            return new StringCalculatorToken {Type = StringCalculatorToken.Types.Delimiter, Content = new string(currentChar, 1)};
+            var delimiter = new string(currentChar, 1);
+            return StringCalculatorToken.DelimiterToken(delimiter);
         }
 
         private void Reset()
