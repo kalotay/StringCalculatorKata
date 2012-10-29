@@ -13,7 +13,12 @@ namespace StringCalculator.Lexer
 
         public IEnumerable<StringCalculatorToken> Read()
         {
-            yield break;
+            if (string.IsNullOrEmpty(_message))
+            {
+                yield break;
+            }
+
+            yield return new StringCalculatorToken {Content = _message, Type = StringCalculatorToken.Types.Numbers};
         }
     }
 }
