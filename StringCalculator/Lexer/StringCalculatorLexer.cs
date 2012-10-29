@@ -43,13 +43,7 @@ namespace StringCalculator.Lexer
                 else if (currentChar == '[')
                 {
                     yield return StringCalculatorToken.MultiCharacterDelimiterStart;
-                    var delimiterLength = 0;
-                    while (_message[_position + delimiterLength] != ']')
-                    {
-                        delimiterLength += 1;
-                    }
-                    yield return new StringCalculatorToken {Type = StringCalculatorToken.Types.Delimiter, Content = _message.Substring(_position, delimiterLength)};
-                    _position += (delimiterLength + 1);
+                    yield return EmitMultiCharacterDelimiterToken();
                     yield return StringCalculatorToken.MultiCharacterDelimiterEnd;
                 }
                 else
@@ -59,6 +53,22 @@ namespace StringCalculator.Lexer
             }
 
             yield return EmitNumbers();
+        }
+
+        private StringCalculatorToken EmitMultiCharacterDelimiterToken()
+        {
+            var delimiterStart = _position;
+            var delimiterLength = 0;
+            while (_message[delimiterStart + delimiterLength] != ']')
+            {
+                delimiterLength += 1;
+            }
+            _position += (delimiterLength + 1);
+            return new StringCalculatorToken
+                       {
+                           Type = StringCalculatorToken.Types.Delimiter,
+                           Content = _message.Substring(delimiterStart, delimiterLength)
+                       };
         }
 
         private StringCalculatorToken EmitNumbers()
