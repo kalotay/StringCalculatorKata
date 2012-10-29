@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lexer\LexerTests.cs" />
+    <Compile Include="Lexer\StringCalculatorLexer.cs" />
+    <Compile Include="Lexer\StringCalculatorToken.cs" />
     <Compile Include="Parser\RegexNormalisationExtension.cs" />
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="Parser\IParser.cs" />
