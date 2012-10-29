@@ -31,7 +31,7 @@ namespace StringCalculator.Parser
 
         public DelimiterParser(IEnumerable<string> defaultDelimiters)
         {
-            _defaultDelimiters = new Regex(defaultDelimiters.NormaliseForRegex());
+            _defaultDelimiters = defaultDelimiters.GenerateSplitter();
         }
 
         public IEnumerable<int> Parse(string message)
@@ -64,12 +64,10 @@ namespace StringCalculator.Parser
             var singleCharDelimiterCaptures = singleCharDelimiterGroup.Captures.OfType<Capture>();
             var multiCharDelimiterCaptures = multiCharDelimiterGroup.Captures.OfType<Capture>();
 
-            var delimiters = singleCharDelimiterCaptures
+            return singleCharDelimiterCaptures
                 .Concat(multiCharDelimiterCaptures)
                 .Select(capture => capture.Value)
-                .NormaliseForRegex();
-
-            return new Regex(delimiters);
+                .GenerateSplitter();
         }
 
         private static bool AreDelimiterGroupsEmpty(Capture singleCharDelimiterGroup, Capture multiCharDelimiterGroup)

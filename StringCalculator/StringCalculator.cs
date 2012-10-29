@@ -15,8 +15,7 @@ namespace StringCalculator
         public StringCalculator(IEnumerable<string> defaultDelimiters, IProcessor processor)
         {
             _processor = processor;
-            var delimitersRegexSpec = defaultDelimiters.NormaliseForRegex();
-            _defaultSplitter = new Regex(delimitersRegexSpec);
+            _defaultSplitter = defaultDelimiters.GenerateSplitter();
         }
 
         public int Add(string message)
@@ -44,11 +43,10 @@ namespace StringCalculator
             }
 
             var numberSplitter = delimiters.Any() ?
-                new Regex(delimiters.NormaliseForRegex()) :
+                delimiters.GenerateSplitter() :
                 _defaultSplitter;
 
-            var numbers = 
-                numberSplitter
+            var numbers = numberSplitter
                 .Split(numbersString)
                 .Select(int.Parse);
 
