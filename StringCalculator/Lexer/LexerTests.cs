@@ -24,7 +24,7 @@ namespace StringCalculator.Lexer
             var numbers = tokens.First();
 
             Assert.That(tokens.Count(), Is.EqualTo(1));
-            Assert.That(numbers.Type, Is.EqualTo(StringCalculatorToken.Types.Numbers));
+            Assert.That(numbers.GetType(), Is.EqualTo(typeof(NumbersToken)));
             Assert.That(numbers.Content, Is.EqualTo("1,2,3"));
         }
 
@@ -39,16 +39,16 @@ namespace StringCalculator.Lexer
 
             Assert.That(tokens.Count(), Is.EqualTo(5));
 
-            Assert.That(tokens[0], Is.EqualTo(StringCalculatorToken.DelimitersStart));
+            Assert.That(tokens[0], Is.EqualTo(DelimiterSpecStart.Token));
 
-            Assert.That(semiColon.Type, Is.EqualTo(StringCalculatorToken.Types.Delimiter));
+            Assert.That(semiColon.GetType(), Is.EqualTo(typeof(DelimiterToken)));
             Assert.That(semiColon.Content, Is.EqualTo(";"));
-            Assert.That(underScore.Type, Is.EqualTo(StringCalculatorToken.Types.Delimiter));
+            Assert.That(underScore.GetType(), Is.EqualTo(typeof(DelimiterToken)));
             Assert.That(underScore.Content, Is.EqualTo("_"));
 
-            Assert.That(tokens[3], Is.EqualTo(StringCalculatorToken.DelimitersEnd));
+            Assert.That(tokens[3], Is.EqualTo(DelimiterSpecEnd.Token));
 
-            Assert.That(numbers.Type, Is.EqualTo(StringCalculatorToken.Types.Numbers));
+            Assert.That(numbers.GetType(), Is.EqualTo(typeof(NumbersToken)));
             Assert.That(numbers.Content, Is.EqualTo("1;2_3"));
         }
 
@@ -62,16 +62,16 @@ namespace StringCalculator.Lexer
 
             Assert.That(tokens.Count(), Is.EqualTo(6));
 
-            Assert.That(tokens[0], Is.EqualTo(StringCalculatorToken.DelimitersStart));
-            Assert.That(tokens[1], Is.EqualTo(StringCalculatorToken.MultiCharacterDelimiterStart));
+            Assert.That(tokens[0], Is.EqualTo(DelimiterSpecStart.Token));
+            Assert.That(tokens[1], Is.EqualTo(MultiCharacterDelimiterStart.Token));
 
-            Assert.That(delimiter.Type, Is.EqualTo(StringCalculatorToken.Types.Delimiter));
+            Assert.That(delimiter.GetType(), Is.EqualTo(typeof(DelimiterToken)));
             Assert.That(delimiter.Content, Is.EqualTo(":-"));
 
-            Assert.That(tokens[3], Is.EqualTo(StringCalculatorToken.MultiCharacterDelimiterEnd));
-            Assert.That(tokens[4], Is.EqualTo(StringCalculatorToken.DelimitersEnd));
+            Assert.That(tokens[3], Is.EqualTo(MultiCharacterDelimiterEnd.Token));
+            Assert.That(tokens[4], Is.EqualTo(DelimiterSpecEnd.Token));
 
-            Assert.That(numbers.Type, Is.EqualTo(StringCalculatorToken.Types.Numbers));
+            Assert.That(numbers.GetType(), Is.EqualTo(typeof(NumbersToken)));
             Assert.That(numbers.Content, Is.EqualTo("1:-2"));
         }
 

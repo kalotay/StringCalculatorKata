@@ -48,8 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lexer\Tokens\DelimiterToken.cs" />
+    <Compile Include="Lexer\Tokens\MultiCharacterDelimiterEnd.cs" />
+    <Compile Include="Lexer\Tokens\DelimiterSpecEnd.cs" />
+    <Compile Include="Lexer\Tokens\DelimiterSpecStart.cs" />
     <Compile Include="Lexer\Tokens\IToken.cs" />
-    <Compile Include="Lexer\Tokens\StringCalculatorToken.cs" />
+    <Compile Include="Lexer\Tokens\MultiCharacterDelimiterStart.cs" />
+    <Compile Include="Lexer\Tokens\NumbersToken.cs" />
     <Compile Include="NoRegexStringCalculatorIntegrationTests.cs" />
     <Compile Include="Lexer\LexerTests.cs" />
     <Compile Include="Lexer\StringCalculatorLexer.cs" />

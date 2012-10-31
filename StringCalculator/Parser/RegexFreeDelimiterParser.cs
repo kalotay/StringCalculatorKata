@@ -23,12 +23,12 @@ namespace StringCalculator.Parser
 
             foreach (var token in lexer.Read())
             {
-                if (token.Type == StringCalculatorToken.Types.Delimiter)
+                if (token is DelimiterToken)
                 {
                     delimiters.Add(token.Content);
                 }
 
-                if (token.Type == StringCalculatorToken.Types.Numbers)
+                if (token is NumbersToken)
                 {
                     numbersString = token.Content;
                 }

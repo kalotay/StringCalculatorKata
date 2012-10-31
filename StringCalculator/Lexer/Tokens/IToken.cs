@@ -1,6 +1,6 @@
 ﻿namespace StringCalculator.Lexer.Tokens
 {
-    interface IToken
+    public interface IToken
     {
         string Content { get; }
     }

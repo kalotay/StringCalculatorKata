@@ -14,7 +14,7 @@ namespace StringCalculator.Lexer
             Reset();
         }
 
-        public IEnumerable<StringCalculatorToken> Read()
+        public IEnumerable<IToken> Read()
         {
             if (string.IsNullOrEmpty(_message))
             {
@@ -27,7 +27,7 @@ namespace StringCalculator.Lexer
             {
                 hasDelimiterSpec = true;
                 _position += 2;
-                yield return StringCalculatorToken.DelimitersStart;
+                yield return DelimiterSpecStart.Token;
             }
 
             while (hasDelimiterSpec)
@@ -39,13 +39,13 @@ namespace StringCalculator.Lexer
                 {
                     case '\n':
                         hasDelimiterSpec = false;
-                        yield return StringCalculatorToken.DelimitersEnd;
+                        yield return DelimiterSpecEnd.Token;
                         break;
 
                     case '[':
-                        yield return StringCalculatorToken.MultiCharacterDelimiterStart;
+                        yield return MultiCharacterDelimiterStart.Token;
                         yield return EmitMultiCharacterDelimiterToken();
-                        yield return StringCalculatorToken.MultiCharacterDelimiterEnd;
+                        yield return MultiCharacterDelimiterEnd.Token;
                         break;
 
                     default:
@@ -57,7 +57,7 @@ namespace StringCalculator.Lexer
             yield return EmitNumbers();
         }
 
-        private StringCalculatorToken EmitMultiCharacterDelimiterToken()
+        private IToken EmitMultiCharacterDelimiterToken()
         {
             var delimiterStart = _position;
             var delimiterLength = 0;
@@ -68,19 +68,19 @@ namespace StringCalculator.Lexer
             _position += (delimiterLength + 1);
             var delimiter = _message.Substring(delimiterStart, delimiterLength);
 
-            return StringCalculatorToken.DelimiterToken(delimiter);
+            return new DelimiterToken(delimiter);
         }
 
-        private StringCalculatorToken EmitNumbers()
+        private IToken EmitNumbers()
         {
             var numbers = _message.Substring(_position);
-            return StringCalculatorToken.NumbersToken(numbers);
+            return new NumbersToken(numbers);
         }
 
-        private static StringCalculatorToken EmitSingleCharacterDelimiterToken(char currentChar)
+        private static IToken EmitSingleCharacterDelimiterToken(char currentChar)
         {
             var delimiter = new string(currentChar, 1);
-            return StringCalculatorToken.DelimiterToken(delimiter);
+            return new DelimiterToken(delimiter);
         }
 
         private void Reset()
