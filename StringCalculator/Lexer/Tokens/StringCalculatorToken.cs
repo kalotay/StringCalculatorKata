@@ -1,6 +1,6 @@
-﻿namespace StringCalculator.Lexer
+namespace StringCalculator.Lexer.Tokens
 {
-    public struct StringCalculatorToken
+    public struct StringCalculatorToken: IToken
     {
         public enum Types
         {
@@ -13,7 +13,7 @@
         }
 
         public readonly Types Type;
-        public readonly string Content;
+        public string Content { get; private set; }
 
         public static readonly StringCalculatorToken DelimitersStart =
             new StringCalculatorToken(Types.DelimitersStart, "//");
@@ -37,10 +37,11 @@
             return new StringCalculatorToken(Types.Numbers, content);
         }
 
-        private StringCalculatorToken(Types type, string content)
+        private StringCalculatorToken(Types type, string content) : this()
         {
             Type = type;
             Content = content;
         }
+
     }
 }

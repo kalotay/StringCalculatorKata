@@ -48,10 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lexer\Tokens\IToken.cs" />
+    <Compile Include="Lexer\Tokens\StringCalculatorToken.cs" />
     <Compile Include="NoRegexStringCalculatorIntegrationTests.cs" />
     <Compile Include="Lexer\LexerTests.cs" />
     <Compile Include="Lexer\StringCalculatorLexer.cs" />
-    <Compile Include="Lexer\StringCalculatorToken.cs" />
     <Compile Include="Parser\RegexFreeParserTests.cs" />
     <Compile Include="Parser\RegexFreeDelimiterParser.cs" />
     <Compile Include="Parser\RegexNormalisationExtension.cs" />

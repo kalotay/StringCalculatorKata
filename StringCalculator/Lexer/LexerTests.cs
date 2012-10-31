@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using StringCalculator.Lexer.Tokens;
 
 namespace StringCalculator.Lexer
 {
